@@ -1,11 +1,11 @@
-import os, requests, json
-from flask import Blueprint, request
+import os, json, re
+from flask import Blueprint, request, jsonify
 from app.models import User, db
 from app.forms import LoginForm, SignUpForm, UpdateUserForm, UpdatePasswordForm
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.security import check_password_hash
+from sqlalchemy.exc import IntegrityError
 from .aws_helpers import upload_file_to_s3, get_unique_filename
-
 
 auth_routes = Blueprint("auth", __name__)
 
@@ -39,24 +39,6 @@ def get_current_user(id):
     return user.to_dict(), 200
 
 
-@auth_routes.route("/login", methods=["POST"])
-def login():
-    # //*====> Logs a user in <====
-    form = LoginForm()
-    form["csrf_token"].data = request.cookies["csrf_token"]
-
-    if form.validate_on_submit():
-        user = User.query.filter(User.email == form.data["email"]).first()
-
-        if user.is_deleted == True:
-            return {"message": "User not found"}, 404
-
-        login_user(user)
-        return user.to_dict()
-
-    return form.errors, 401
-
-
 @auth_routes.route("/update", methods=["PUT"])
 @login_required
 def update_user():
@@ -68,7 +50,7 @@ def update_user():
         user = User.query.filter(
             User.email == form.data["email"]
             and User.is_deleted == False
-            and user == current_user
+            and User.id == current_user.id
         ).first()
 
         if not user:
@@ -89,10 +71,30 @@ def update_user():
         user.first_name = form.data["first_name"]
         user.last_name = form.data["last_name"]
 
+    try:
         db.session.commit()
-        return user.to_dict()
+        return jsonify(user.to_dict()), 200
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify({"error": "Could not update user information"}), 500
 
-    return form.errors, 400
+
+@auth_routes.route("/login", methods=["POST"])
+def login():
+    # //*====> Logs a user in <====
+    form = LoginForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+
+    if form.validate_on_submit():
+        user = User.query.filter(User.email == form.data["email"]).first()
+
+        if user.is_deleted == True:
+            return {"message": "User not found"}, 404
+
+        login_user(user)
+        return jsonify(user.to_dict()), 200
+
+    return form.errors, 401
 
 
 @auth_routes.route("/password", methods=["PUT"])
@@ -140,18 +142,14 @@ def delete_user():
 
 @auth_routes.route("/logout")
 def logout():
-    """
-    Logs a user out
-    """
+    # //*====> Logs a user out <====
     logout_user()
     return {"message": "User has been logged out"}, 200
 
 
 @auth_routes.route("/signup", methods=["POST"])
 def sign_up():
-    """
-    Creates a new user and logs them in
-    """
+    # //*====> Signs a user up <====
     form = SignUpForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():

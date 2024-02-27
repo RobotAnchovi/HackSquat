@@ -23,12 +23,12 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     # //*====> One-to-Many <====
-    workout_plans = db.relationship("WorkoutPlan", back_populates="user")
-    exercises = db.relationship(
-        "Exercise", back_populates="user", cascade="all, delete"
-    )
-    nutrition_profiles = db.relationship("NutritionProfile", back_populates="user")
-    body_measurements = db.relationship("BodyMeasurement", back_populates="user")
+    # workout_plans = db.relationship("WorkoutPlan", back_populates="user")
+    # exercises = db.relationship(
+    #     "Exercise", back_populates="user", cascade="all, delete"
+    # )
+    # nutrition_profiles = db.relationship("NutritionProfile", back_populates="user")
+    # body_measurements = db.relationship("BodyMeasurement", back_populates="user")
 
     # //*====> Many-to-Many <====
     # insert association table here if needed later
