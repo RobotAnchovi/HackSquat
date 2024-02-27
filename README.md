@@ -65,8 +65,8 @@
 ### Technical Considerations
 
 - **Frontend**: Since I’m familiar with React, Redux, and Vite, these tools will serve well for building a responsive, state-managed UI. Consider using Tailwind CSS or Styled Components for efficient, maintainable styling.
-- **Backend**: For the server side, Node.js with Express provides a flexible, scalable foundation. I can structure my API to handle user authentication, data management, and business logic for workout and nutrition calculations.
-- **Deployment**: Look into deploying my app on platforms like Heroku or Netlify for the frontend, with PostgreSQL service for my database. Ensure secure HTTPS connections and consider using Docker for easier deployment and scalability.
+- **Backend**: For the server side, Flask with PostgrSql provides a flexible, scalable foundation. I can structure my API to handle user authentication, data management, and business logic for workout and nutrition calculations.
+- **Deployment**: Deploying on Render for the frontend, with PostgreSQL service for my database. Ensure secure HTTPS connections and consider using Docker for easier deployment and scalability.
 
 ### Development Strategy
 
