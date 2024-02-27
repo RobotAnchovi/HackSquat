@@ -1,8 +1,7 @@
-from email.mime import image
+import os, requests, json
 from flask import Blueprint, request
 from app.models import User, db
-from app.forms import LoginForm
-from app.forms import SignUpForm
+from app.forms import LoginForm, SignUpForm, UpdateUserForm, UpdatePasswordForm
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.security import check_password_hash
 from .aws_helpers import upload_file_to_s3, get_unique_filename

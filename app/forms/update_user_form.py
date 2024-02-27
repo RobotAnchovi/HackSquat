@@ -1,4 +1,3 @@
-from msilib.schema import File
 import re
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
@@ -10,25 +9,23 @@ from ..api.aws_helpers import ALLOWED_EXTENSIONS_IMAGE
 
 
 def user_exists(form, field):
-    # ^ Checking if user exists
     email = field.data
     user = User.query.filter(User.email == email).first()
-    if user:
-        raise ValidationError("Email address is already in use.")
+    if not user:
+        raise ValidationError("User not found")
 
 
 def username_exists(form, field):
-    # ^ Checking if username is already in use
     username = field.data
     user = User.query.filter(User.username == username).first()
-    if user:
-        raise ValidationError("Username is already in use.")
+    if not user:
+        raise ValidationError("User not found")
 
 
 def validate_email(form, field):
     regex = r"^[^@]+@[^@]+\.[^@]+$"
     if not bool(re.match(regex, field.data)):
-        raise ValidationError("Email is invalid.")
+        raise ValidationError("Invalid email.")
 
 
 def username_check_len(form, field):
@@ -48,11 +45,11 @@ def validate_photo_url(form, field):
         except:
             raise ValidationError("Must be a valid URL.")
         if "image" not in content_type:
-            raise ValidationError("Photo must be a valid image URL!")
+            raise ValidationError("Image must be .png, .jpg, .jpeg, or .gif!")
         return False
 
 
-class SignUpForm(FlaskForm):
+class UpdateUserForm(FlaskForm):
     first_name = StringField("First name", validators=[DataRequired()])
     last_name = StringField("Last name", validators=[DataRequired()])
     username = StringField(
@@ -63,5 +60,5 @@ class SignUpForm(FlaskForm):
     )
     password = StringField("Password", validators=[DataRequired(), password_check_len])
     profile_image_url = FileField(
-        "Profile Image Url", validators=[FileAllowed(ALLOWED_EXTENSIONS_IMAGE)]
+        "Profile Image Url", validators=[FileAllowed(list(ALLOWED_EXTENSIONS_IMAGE))]
     )

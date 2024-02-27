@@ -46,22 +46,21 @@ def upload_file_to_s3(file, filename, acl="public-read"):
         return {"url": f"{S3_LOCATION}{filename}"}
 
     except botocore.exceptions.ClientError as e:
-        # ClientError is thrown for client-side issues or problems with AWS service
+        # ^ ClientError is thrown for client-side issues or problems with AWS service
         error_code = e.response["Error"]["Code"]
         error_msg = f"S3 Error [{error_code}]: {str(e)}"
         logger.error(f"Error uploading file to S3: {error_msg}")
         return {"errors": error_msg}
 
     except Exception as e:
-        # Generic catch-all for any other unexpected errors
+        # ^ Generic catch-all for any other unexpected errors
         error_msg = f"Unknown error: {str(e)}"
         logger.error(f"Error uploading file to S3: {error_msg}")
         return {"errors": error_msg}
 
 
 def remove_file_from_s3(image_url):
-    # AWS needs the image file name, not the URL,
-    # so you split that out of the URL
+    # ^ AWS needs the image file name, not the URL,
     key = image_url.rsplit("/", 1)[1]
     try:
         s3.delete_object(Bucket=BUCKET_NAME, Key=key)
