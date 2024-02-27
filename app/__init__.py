@@ -14,7 +14,7 @@ app = Flask(__name__, static_folder="../react-vite/dist", static_url_path="/")
 
 # Setup login manager
 login = LoginManager(app)
-login.login_view = "auth.unauthorized"
+login.login_view = "auth.unauthorized"  # type: ignore
 
 
 @login.user_loader
@@ -69,7 +69,7 @@ def api_help():
     acceptable_methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
     route_list = {
         rule.rule: [
-            [method for method in rule.methods if method in acceptable_methods],
+            [method for method in rule.methods if method in acceptable_methods],  # type: ignore
             app.view_functions[rule.endpoint].__doc__,
         ]
         for rule in app.url_map.iter_rules()
@@ -87,7 +87,7 @@ def react_root(path):
     or index.html requests
     """
     if path == "favicon.ico":
-        return app.send_from_directory("public", "favicon.ico")
+        return app.send_from_directory("public", "favicon.ico")  # type: ignore
     return app.send_static_file("index.html")
 
 

@@ -1,4 +1,4 @@
-import os, json, re
+import os
 from flask import Blueprint, request, jsonify
 from app.models import User, db
 from app.forms import LoginForm, SignUpForm, UpdateUserForm, UpdatePasswordForm
@@ -94,7 +94,7 @@ def login():
         login_user(user)
         return jsonify(user.to_dict()), 200
 
-    return form.errors, 401
+    return jsonify(form.errors), 401
 
 
 @auth_routes.route("/password", methods=["PUT"])
@@ -106,17 +106,20 @@ def update_user_password():
 
     if form.validate_on_submit():
         if not check_password_hash(current_user.password, form.data["password"]):
-            return {"password": "Password is incorrect"}, 400
+            return jsonify({"password": "Password is incorrect"}), 400
         current_user.password = form.data["new_password"]
 
         db.session.commit()
 
         logout_user()
-        return {
-            "message": "Successfully updated your password. Please log in again."
-        }, 200
+        return (
+            jsonify(
+                {"message": "Successfully updated your password. Please log in again."}
+            ),
+            200,
+        )
 
-    return form.errors, 400
+    return jsonify(form.errors), 400
 
 
 @auth_routes.route("/delete", methods=["DELETE"])
@@ -173,9 +176,9 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        return user.to_dict()
+        return jsonify(user.to_dict()), 200
 
-    return form.errors, 400
+    return jsonify(form.errors), 400
 
 
 @auth_routes.route("/unauthorized")
