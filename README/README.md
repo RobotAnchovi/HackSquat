@@ -240,14 +240,15 @@ Dashboards
 - **Endpoint:** POST `/api/workout-plans`
 - **Description:** Allows users to create a new workout plan with specific details.
 - **Body:**
+
   ```json
   {
-    "user_id": "user-unique-id",
     "name": "Plan Name",
     "description": "Plan Description"
     // Additional details like phases, lift days, exercises per day can be included as needed.
   }
   ```
+
 - **Require Authentication:** Yes
 - **Success Response:** 201 Created
   - Body:

@@ -1,9 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, IntegerField, validators
+from wtforms import StringField, TextAreaField, validators
 
 
 class WorkoutPlanForm(FlaskForm):
-    user_id = IntegerField("User ID", [validators.DataRequired()])
     name = StringField(
         "Plan Name",
         [
