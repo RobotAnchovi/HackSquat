@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from app.models import db, WorkoutPlan
 from app.forms import WorkoutPlanForm
 
-workout_plan_routes = Blueprint("workout_plans", __name__)
+workout_plan_routes = Blueprint("workout-plans", __name__)
 
 
 # //*====> Create a new workout plan <====

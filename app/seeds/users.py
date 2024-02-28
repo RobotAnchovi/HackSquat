@@ -3,12 +3,14 @@ from sqlalchemy.sql import text
 
 
 def seed_users():
+
     demo = User(
         username="Demo",
         first_name="Demo",
         last_name="Lition",
         email="demo@aa.io",
         password="password",
+        profile_image_url="https://hacksquat-bucket.s3.us-east-2.amazonaws.com/icons8-weightlifting-50.png",
     )
     marisela = User(
         username="seli",
@@ -16,6 +18,7 @@ def seed_users():
         last_name="Gomez",
         email="seli@aa.io",
         password="password",
+        profile_image_url="https://hacksquat-bucket.s3.us-east-2.amazonaws.com/seli-profile.jpeg",
     )
     dwayne = User(
         username="dmoney",
@@ -23,6 +26,7 @@ def seed_users():
         last_name="Walker",
         email="dwayne@aa.io",
         password="password",
+        profile_image_url="https://hacksquat-bucket.s3.us-east-2.amazonaws.com/icons8-weightlifting-50.png",
     )
     logan = User(
         username="fated",
@@ -30,6 +34,7 @@ def seed_users():
         last_name="Fate",
         email="logan@aa.io",
         password="password",
+        profile_image_url="https://hacksquat-bucket.s3.us-east-2.amazonaws.com/logan-profile.png",
     )
     jason = User(
         username="robotanchovy",
@@ -37,6 +42,7 @@ def seed_users():
         last_name="Whitlock",
         email="jason@aa.io",
         password="password",
+        profile_image_url="https://hacksquat-bucket.s3.us-east-2.amazonaws.com/217AEB97-AD87-4B6E-973D-AA74E2438F8A.jpeg",
     )
 
     db.session.add(demo)

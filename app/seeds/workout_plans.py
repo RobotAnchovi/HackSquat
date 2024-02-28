@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 
 
 def seed_workout_plans():
+    print("Starting to seed workout plans...")
     # ^ Attempt to fetch the user with id=1
     user = User.query.get(1)
     if not user:

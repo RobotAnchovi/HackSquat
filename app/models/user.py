@@ -23,7 +23,12 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     # //*====> One-to-Many <====
-    # workout_plans = db.relationship("WorkoutPlan", back_populates="user")
+    workout_plans = db.relationship(
+        "WorkoutPlan",
+        back_populates="user",
+        lazy="select",
+        cascade="delete, delete-orphan",
+    )
     # exercises = db.relationship(
     #     "Exercise", back_populates="user", cascade="all, delete"
     # )
