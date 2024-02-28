@@ -40,7 +40,7 @@
 
 ### Database Schema
 
-![Database Schema](./wireframes/Hack-Squat-DB.png)
+![Database Schema](/wireframes/Hack-Squat-DB.png)
 
 ### 1. **Workout Planning and Scheduling**
 
