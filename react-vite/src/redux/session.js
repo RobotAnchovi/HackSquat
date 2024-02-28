@@ -1,69 +1,134 @@
-const SET_USER = 'session/setUser';
-const REMOVE_USER = 'session/removeUser';
+import { csrfFetch } from './csrf';
 
+//*====> Actions <====
+const SET_USER = 'session/SET_USER';
+const REMOVE_USER = 'session/REMOVE_USER';
+
+//*====> Action Creators <====
 const setUser = (user) => ({
   type: SET_USER,
-  payload: user
+  payload: user,
 });
 
 const removeUser = () => ({
-  type: REMOVE_USER
+  type: REMOVE_USER,
 });
 
-export const thunkAuthenticate = () => async (dispatch) => {
-	const response = await fetch("/api/auth/");
-	if (response.ok) {
-		const data = await response.json();
-		if (data.errors) {
-			return;
-		}
+export const restoreSession = () => async (dispatch, getState) => {
+  if (getState().session.user !== null) return;
 
-		dispatch(setUser(data));
-	}
-};
-
-export const thunkLogin = (credentials) => async dispatch => {
-  const response = await fetch("/api/auth/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(credentials)
-  });
-
-  if(response.ok) {
+  const response = await csrfFetch('/api/auth/');
+  if (response.ok) {
     const data = await response.json();
+    if (data.errors) return;
     dispatch(setUser(data));
-  } else if (response.status < 500) {
-    const errorMessages = await response.json();
-    return errorMessages
-  } else {
-    return { server: "Something went wrong. Please try again" }
   }
 };
 
-export const thunkSignup = (user) => async (dispatch) => {
-  const response = await fetch("/api/auth/signup", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(user)
+export const login = (credentials) => async (dispatch) => {
+  const response = await csrfFetch('/api/auth/login', {
+    method: 'POST',
+    body: JSON.stringify({
+      ...credentials,
+    }),
   });
 
-  if(response.ok) {
-    const data = await response.json();
-    dispatch(setUser(data));
-  } else if (response.status < 500) {
-    const errorMessages = await response.json();
-    return errorMessages
-  } else {
-    return { server: "Something went wrong. Please try again" }
-  }
+  const data = await response.json();
+  if (!response.ok) return { errors: data };
+  dispatch(setUser(data));
 };
 
-export const thunkLogout = () => async (dispatch) => {
-  await fetch("/api/auth/logout");
+export const signup = (user) => async (dispatch) => {
+  const {
+    first_name,
+    last_name,
+    profile_image_url,
+    email,
+    username,
+    password,
+  } = user;
+  const formData = new FormData();
+  formData.append('first_name', first_name);
+  formData.append('last_name', last_name);
+  formData.append('email', email);
+  formData.append('username', username);
+  formData.append('password', password);
+
+  if (profile_image_url)
+    formData.append('profile_image_url', profile_image_url);
+
+  const response = await csrfFetch('/api/auth/signup', {
+    method: 'POST',
+    body: formData,
+  });
+
+  const data = await response.json();
+  if (!response.ok) return { errors: data };
+  dispatch(setUser(data));
+};
+
+export const updateUser = (user) => async (dispatch) => {
+  const {
+    first_name,
+    last_name,
+    profile_image_url,
+    email,
+    username,
+    password,
+  } = user;
+  const formData = new FormData();
+  formData.append('first_name', first_name);
+  formData.append('last_name', last_name);
+  formData.append('email', email);
+  formData.append('username', username);
+  formData.append('password', password);
+
+  if (profile_image_url)
+    formData.append('profile_image_url', profile_image_url);
+
+  const response = await csrfFetch('/api/auth/update', {
+    method: 'PUT',
+    body: formData,
+  });
+
+  const data = await response.json();
+  if (!response.ok) return { errors: data };
+  dispatch(setUser(data));
+};
+
+export const updateUserPassword = (user) => async (dispatch) => {
+  const response = await csrfFetch('/api/auth/password', {
+    method: 'PUT',
+    body: JSON.stringify({
+      ...user,
+    }),
+  });
+
+  const data = await response.json();
+  if (!response.ok) return { errors: data };
   dispatch(removeUser());
 };
 
-const initialState = { user: null };
+export const deleteUser = () => async (dispatch) => {
+  const response = await csrfFetch(`/api/auth/delete`, {
+    method: 'DELETE',
+  });
+
+  if (response.ok) {
+    dispatch(removeUser());
+  }
+};
+
+export const logout = () => async (dispatch) => {
+  await csrfFetch('/api/auth/logout');
+  dispatch(removeUser());
+};
+
+// Custom selectors
+export const sessionUser = (state) => state.session.user;
+
+// Reducer
+const initialState = { user: null, emojis: null };
 
 function sessionReducer(state = initialState, action) {
   switch (action.type) {
@@ -71,8 +136,6 @@ function sessionReducer(state = initialState, action) {
       return { ...state, user: action.payload };
     case REMOVE_USER:
       return { ...state, user: null };
-    default:
-      return state;
   }
 }
 
