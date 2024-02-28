@@ -11,6 +11,8 @@ import os
 from sqlalchemy import engine_from_config
 from typing import cast
 from sqlalchemy.engine import Connection
+from sqlalchemy import pool
+from sqlalchemy import MetaData
 
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
@@ -93,15 +95,17 @@ def run_migrations_online():
     connectable = engine_from_config(
         config.get_section(config.config_ini_section),
         prefix="sqlalchemy.",
-        poolclass=pool.NullPool,  # type: ignore
+        poolclass=pool.NullPool,
     )
 
     # ...
 
+    target_metadata = MetaData()
+
     connection = connectable.connect()
     context.configure(
         connection=cast(Connection, connection),
-        target_metadata=target_metadata,  # type: ignore
+        target_metadata=target_metadata,
         process_revision_directives=process_revision_directives,
         **current_app.extensions["migrate"].configure_args,
     )
