@@ -17,7 +17,7 @@ function HomePage() {
 
   //   if (!isLoaded) return <Loading />;
 
-  return <div id='home-page'>Placeholder</div>;
+  return <div id='home-page'>HomePage</div>;
 }
 
 export default HomePage;
