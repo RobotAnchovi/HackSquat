@@ -1,17 +1,18 @@
 """merge heads
 
 Revision ID: ddaca65062aa
-Revises: 
+Revises:
 Create Date: 2024-02-27 22:11:37.766411
 
 """
+
 from alembic import op
 import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ddaca65062aa'
-down_revision = None
+revision = "ddaca65062aa"
+down_revision = "ac6d37426d15"
 branch_labels = None
 depends_on = None
 
