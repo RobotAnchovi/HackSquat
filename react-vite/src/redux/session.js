@@ -128,7 +128,7 @@ export const logout = () => async (dispatch) => {
 export const sessionUser = (state) => state.session.user;
 
 // Reducer
-const initialState = { user: null, emojis: null };
+const initialState = { user: null };
 
 function sessionReducer(state = initialState, action) {
   switch (action.type) {
@@ -136,6 +136,8 @@ function sessionReducer(state = initialState, action) {
       return { ...state, user: action.payload };
     case REMOVE_USER:
       return { ...state, user: null };
+    default:
+      return state;
   }
 }
 
