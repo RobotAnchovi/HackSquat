@@ -4,11 +4,13 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import generate_csrf
 from flask_login import LoginManager
-from .models import db, User, WorkoutPlan, Exercise
+from .models import db, User, WorkoutPlan, Exercise, WorkoutExercise, Workout
 from .api.workout_plan_routes import workout_plan_routes
 from .api.exercise_routes import exercise_routes
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
+from .api.workout_exercises_routes import workout_exercises_routes
+from .api.workout_routes import workout_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -32,6 +34,9 @@ app.register_blueprint(auth_routes, url_prefix="/api/auth")
 app.register_blueprint(user_routes, url_prefix="/api/users")
 app.register_blueprint(workout_plan_routes, url_prefix="/api/workout-plans")
 app.register_blueprint(exercise_routes, url_prefix="/api/exercises")
+app.register_blueprint(workout_exercises_routes, url_prefix="/api/workout-exercises")
+app.register_blueprint(workout_routes, url_prefix="/api/workouts")
+
 db.init_app(app)
 Migrate(app, db)
 
