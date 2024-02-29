@@ -13,7 +13,7 @@ class Exercise(db.Model):
 
     exercise_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(
-        db.String(36),
+        db.Integer,
         db.ForeignKey(f"{add_prefix_for_prod('users')}.id"),
         nullable=True,
     )
@@ -28,6 +28,7 @@ class Exercise(db.Model):
 
     # //*====> Relationships <====
     user = db.relationship("User", back_populates="exercises")
+    workout_exercises = db.relationship("WorkoutExercise", back_populates="exercise")
 
     # //*====> Validations <====
     @validates("name", "description", "category")

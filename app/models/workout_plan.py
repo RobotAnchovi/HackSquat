@@ -20,6 +20,7 @@ class WorkoutPlan(db.Model):
 
     # //*====> Relationships <====
     user = db.relationship("User", back_populates="workout_plans")
+    workouts = db.relationship("Workout", back_populates="workout_plan")
 
     @validates("name")
     def validate_name(self, _, value):
