@@ -637,8 +637,8 @@ def seed_exercises():
 
 def undo_exercises():
     if environment == "production":
-        db.session.execute(
-            f"TRUNCATE table {SCHEMA}.exercises RESTART IDENTITY CASCADE;"
+        db.session.execute(  # type: ignore
+            f"TRUNCATE table {SCHEMA}.exercises RESTART IDENTITY CASCADE;"  # type: ignore
         )
     else:
         db.session.execute(text("DELETE FROM exercises"))
