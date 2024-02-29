@@ -42,7 +42,7 @@ def upgrade():
     op.create_table(
         "exercises",
         sa.Column("exercise_id", sa.Integer(), autoincrement=True, nullable=False),
-        sa.Column("user_id", sa.String(length=36), nullable=True),
+        sa.Column("user_id", sa.Integer(), nullable=True),  # type: ignore
         sa.Column("name", sa.String(length=255), nullable=False),
         sa.Column("description", sa.Text(), nullable=True),
         sa.Column("category", sa.String(length=255), nullable=False),
