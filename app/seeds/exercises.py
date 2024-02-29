@@ -1,6 +1,6 @@
 from app.models import db, Exercise
-from sqlalchemy.dialects.postgresql import UUID
-import uuid
+from app.models import environment, SCHEMA
+from sqlalchemy.sql import text
 
 
 def seed_exercises():
@@ -636,5 +636,11 @@ def seed_exercises():
 
 
 def undo_exercises():
-    db.session.execute("TRUNCATE exercises RESTART IDENTITY CASCADE;")
+    if environment == "production":
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.exercises RESTART IDENTITY CASCADE;"
+        )
+    else:
+        db.session.execute(text("DELETE FROM exercises"))
+
     db.session.commit()

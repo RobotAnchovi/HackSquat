@@ -1,5 +1,6 @@
-from app.models import db, WorkoutPlan, User
+from app.models import db, WorkoutPlan, User, environment, SCHEMA
 from datetime import datetime, timedelta
+from sqlalchemy.sql import text
 
 
 def seed_workout_plans():
@@ -60,11 +61,11 @@ def seed_workout_plans():
 
 
 def undo_workout_plans():
-    try:
+    if environment == "production":
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.workout_plans RESTART IDENTITY CASCADE;"
+        )
+    else:
+        db.session.execute(text("DELETE FROM workout_plans"))
 
-        db.session.execute("TRUNCATE TABLE workout_plans RESTART IDENTITY CASCADE;")
-        db.session.commit()
-        print("Removed all workout plans.")
-    except Exception as e:
-        db.session.rollback()
-        print(f"Error undoing workout plans: {e}")
+    db.session.commit()
