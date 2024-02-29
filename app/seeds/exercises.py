@@ -8,7 +8,6 @@ def seed_exercises():
     public_exercises = [
         # ^ Strength
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Squat",
             description=None,
@@ -16,7 +15,6 @@ def seed_exercises():
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Deadlift",
             description=None,
@@ -24,7 +22,6 @@ def seed_exercises():
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Bench Press",
             description=None,
@@ -32,7 +29,6 @@ def seed_exercises():
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Pull Up",
             description=None,
@@ -40,7 +36,6 @@ def seed_exercises():
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Push Up",
             description=None,
@@ -48,35 +43,30 @@ def seed_exercises():
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Lunges",
             category="Strength",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Planks",
             category="Strength",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Overhead Press",
             category="Strength",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Barbell Rows",
             category="Strength",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Pull Downs",
             category="Strength",
@@ -84,35 +74,30 @@ def seed_exercises():
         ),
         # ^ Cardio
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Running",
             category="Cardio",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Cycling",
             category="Cardio",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Jump Rope",
             category="Cardio",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Rowing",
             category="Cardio",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="High-Intensity Interval Training (HIIT)",
             category="Cardio",
@@ -120,28 +105,24 @@ def seed_exercises():
         ),
         # ^ Flexibility exercises
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Yoga",
             category="Flexibility",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Pilates",
             category="Flexibility",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Dynamic Stretching",
             category="Flexibility",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Static Stretching",
             category="Flexibility",
@@ -149,28 +130,24 @@ def seed_exercises():
         ),
         # ^ Balance exercises
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Single-Leg Deadlift",
             category="Balance",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Balance Ball Exercises",
             category="Balance",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Bosu Ball Exercises",
             category="Balance",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Tai Chi",
             category="Balance",
@@ -178,35 +155,30 @@ def seed_exercises():
         ),
         # ^ Bodyweight exercises
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Mountain Climbers",
             category="Bodyweight",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Burpees",
             category="Bodyweight",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Sit-Ups",
             category="Bodyweight",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Leg Raises",
             category="Bodyweight",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Dips",
             category="Bodyweight",
@@ -214,28 +186,24 @@ def seed_exercises():
         ),
         # ^ Plyometric exercises
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Box Jumps",
             category="Plyometric",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Jump Squats",
             category="Plyometric",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Power Push-Ups",
             category="Plyometric",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Lateral Bounds",
             category="Plyometric",
@@ -243,28 +211,24 @@ def seed_exercises():
         ),
         # ^ Mobility exercises
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Hip Circles",
             category="Mobility",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Shoulder Pass-Throughs",
             category="Mobility",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Cat-Cow Stretches",
             category="Mobility",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Ankle Mobility Exercises",
             category="Mobility",
@@ -272,28 +236,24 @@ def seed_exercises():
         ),
         # ^ Core exercises
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Russian Twists",
             category="Core",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Hollow Hold",
             category="Core",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Flutter Kicks",
             category="Core",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Plank Up-Downs",
             category="Core",
@@ -301,28 +261,24 @@ def seed_exercises():
         ),
         # ^ Strength exercises (More)
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Kettlebell Swings",
             category="Strength",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Farmer's Walk",
             category="Strength",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Turkish Get-Up",
             category="Strength",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Zercher Squat",
             category="Strength",
@@ -330,28 +286,24 @@ def seed_exercises():
         ),
         # ^ Power exercises
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Clean and Jerk",
             category="Power",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Power Clean",
             category="Power",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Medicine Ball Slam",
             category="Power",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Plyometric Push-Up",
             category="Power",
@@ -359,28 +311,24 @@ def seed_exercises():
         ),
         # ^ Speed exercises
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Sprint",
             category="Speed",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Agility Ladder Drills",
             category="Speed",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Speed Skaters",
             category="Speed",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Reactive Shuttle Runs",
             category="Speed",
@@ -388,28 +336,24 @@ def seed_exercises():
         ),
         # ^ Olympic exercises
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Snatch",
             category="Olympic",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Olympic Weightlifting Squats",
             category="Olympic",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Split Jerk",
             category="Olympic",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Hang Clean",
             category="Olympic",
@@ -417,28 +361,24 @@ def seed_exercises():
         ),
         # ^ Accessory exercises
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Calf Raises",
             category="Accessory",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Bicep Curls",
             category="Accessory",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Tricep Extensions",
             category="Accessory",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Face Pulls",
             category="Accessory",
@@ -446,28 +386,24 @@ def seed_exercises():
         ),
         # ^ Other exercises
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Battle Ropes",
             category="Other",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Sandbag Lifts",
             category="Other",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Tire Flips",
             category="Other",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Sled Push/Pull",
             category="Other",
@@ -475,28 +411,24 @@ def seed_exercises():
         ),
         # ^ Strength exercises (additional)
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Hex Bar Deadlift",
             category="Strength",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Good Mornings",
             category="Strength",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Bulgarian Split Squats",
             category="Strength",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Landmine Press",
             category="Strength",
@@ -504,28 +436,24 @@ def seed_exercises():
         ),
         # ^ Cardio exercises (additional)
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Stair Climber",
             category="Cardio",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Elliptical Trainer",
             category="Cardio",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Assault Bike",
             category="Cardio",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Swimming",
             category="Cardio",
@@ -533,28 +461,24 @@ def seed_exercises():
         ),
         # ^ Flexibility exercises (additional)
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Standing Toe Touch",
             category="Flexibility",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Butterfly Stretch",
             category="Flexibility",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Seated Hamstring Stretch",
             category="Flexibility",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Chest Opener Stretch",
             category="Flexibility",
@@ -562,28 +486,24 @@ def seed_exercises():
         ),
         # ^ Plyometrics exercises (additional)
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Depth Jumps",
             category="Plyometrics",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Knee Tuck Jumps",
             category="Plyometrics",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Broad Jumps",
             category="Plyometrics",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Single-Leg Hop",
             category="Plyometrics",
@@ -591,28 +511,24 @@ def seed_exercises():
         ),
         # ^ Bodyweight exercises (additional)
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Handstand Push-Ups",
             category="Bodyweight",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Archer Push-Ups",
             category="Bodyweight",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Pistol Squats",
             category="Bodyweight",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Dragon Flags",
             category="Bodyweight",
@@ -620,28 +536,24 @@ def seed_exercises():
         ),
         # ^ Core exercises (additional)
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Cable Woodchoppers",
             category="Core",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Hanging Leg Raises",
             category="Core",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Ab Wheel Rollouts",
             category="Core",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Swiss Ball Crunches",
             category="Core",
@@ -649,28 +561,24 @@ def seed_exercises():
         ),
         # ^ Power exercises (additional)
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Atlas Stones",
             category="Power",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Log Lift",
             category="Power",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Tire Hammer Strikes",
             category="Power",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Farmer's Carry",
             category="Power",
@@ -678,28 +586,24 @@ def seed_exercises():
         ),
         # ^ Speed exercises (additional)
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Parachute Sprints",
             category="Speed",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Banded Sprints",
             category="Speed",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Cone Drills",
             category="Speed",
             is_public=True,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=None,
             name="Lateral High Knees",
             category="Speed",
@@ -710,7 +614,6 @@ def seed_exercises():
     # ^ User-created exercises (for user_id=1)
     user_exercises = [
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=1,
             name="Demo's Custom Squat",
             description="A custom squat exercise created by Demo.",
@@ -718,7 +621,6 @@ def seed_exercises():
             is_public=False,
         ),
         Exercise(
-            exercise_id=str(uuid.uuid4()),
             user_id=1,
             name="Demo's Custom Cardio",
             description="A custom cardio exercise created by Demo.",

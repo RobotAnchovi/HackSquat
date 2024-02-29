@@ -11,9 +11,7 @@ class Exercise(db.Model):
     if environment == "production":
         __table_args__ = {"schema": SCHEMA}
 
-    exercise_id = db.Column(
-        db.String(36), primary_key=True, default=lambda: str(uuid.uuid4())
-    )
+    exercise_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(
         db.String(36),
         db.ForeignKey(f"{add_prefix_for_prod('users')}.id"),
@@ -23,6 +21,10 @@ class Exercise(db.Model):
     description = db.Column(db.Text, nullable=True)
     category = db.Column(db.String(255), nullable=False)
     is_public = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(
+        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
+    )
 
     # //*====> Relationships <====
     user = db.relationship("User", back_populates="exercises")
@@ -47,9 +49,13 @@ class Exercise(db.Model):
             "category": self.category,
             "is_public": self.is_public,
             "created_at": (
-                self.created_at.strftime("%Y-%m-%d") if self.created_at else None
+                self.created_at.strftime("%Y-%m-%d %H:%M:%S")
+                if self.created_at
+                else None
             ),
             "updated_at": (
-                self.updated_at.strftime("%Y-%m-%d") if self.updated_at else None
+                self.updated_at.strftime("%Y-%m-%d %H:%M:%S")
+                if self.updated_at
+                else None
             ),
         }

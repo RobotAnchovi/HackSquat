@@ -13,7 +13,7 @@ def create_exercise():
     form = ExerciseForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate():
-        new_exercise = Exercise(
+        new_exercise = Exercise(  # type: ignore
             user_id=current_user.id,
             name=form.name.data,
             description=form.description.data,
@@ -45,6 +45,7 @@ def get_exercises():
 @exercise_routes.route("/<int:exercise_id>", methods=["GET"])
 @login_required
 def get_exercise(exercise_id):
+    print(exercise_id, type(exercise_id))
     exercise = Exercise.query.get(exercise_id)
     if exercise:
         return jsonify(exercise.to_dict()), 200
@@ -53,32 +54,43 @@ def get_exercise(exercise_id):
 
 
 # //*====> Update an exercise <====
-@exercise_routes.route("/<uuid:exercise_id>", methods=["PUT"])
+@exercise_routes.route("/<int:exercise_id>", methods=["PUT"])
 @login_required
 def update_exercise(exercise_id):
     exercise = Exercise.query.get(exercise_id)
-    if exercise.user_id != current_user.id:
+    # Debugging output
+    print(
+        f"Comparing user IDs: exercise.user_id={exercise.user_id} ({type(exercise.user_id)}) with current_user.id={current_user.id} ({type(current_user.id)})"  # type: ignore
+    )
+
+    # ^ Convert exercise.user_id to integer for comparison
+    if int(exercise.user_id) != current_user.id:  # type: ignore
+        print(exercise.user_id, current_user.id)  # type: ignore
         return jsonify({"errors": "Unauthorized"}), 403
+
     form = ExerciseForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate():
-        exercise.name = form.name.data
-        exercise.description = form.description.data
-        exercise.category = form.category.data
-        exercise.is_public = form.is_public.data
+        exercise.name = form.name.data  # type: ignore
+        exercise.description = form.description.data  # type: ignore
+        exercise.category = form.category.data  # type: ignore
+        exercise.is_public = form.is_public.data  # type: ignore
         db.session.commit()
-        return jsonify(exercise.to_dict()), 200
+        return jsonify(exercise.to_dict()), 200  # type: ignore
     else:
         return jsonify({"errors": form.errors}), 400
 
 
 # //*====> Delete an exercise <====
-@exercise_routes.route("/<uuid:exercise_id>", methods=["DELETE"])
+@exercise_routes.route("/<int:exercise_id>", methods=["DELETE"])
 @login_required
 def delete_exercise(exercise_id):
     exercise = Exercise.query.get(exercise_id)
-    if exercise.user_id != current_user.id:
+    # Debugging output
+    if int(exercise.user_id) != current_user.id:  # type: ignore
+        print(exercise.user_id, current_user.id)  # type: ignore
         return jsonify({"errors": "Unauthorized"}), 403
+
     db.session.delete(exercise)
     db.session.commit()
     return jsonify({"message": "Exercise deleted."}), 200
