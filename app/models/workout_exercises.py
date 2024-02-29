@@ -1,0 +1,45 @@
+from datetime import datetime
+from .db import db, environment, SCHEMA, add_prefix_for_prod
+from sqlalchemy.orm import validates
+
+
+class WorkoutExercise(db.Model):
+    __tablename__ = "workout_exercises"
+
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
+
+    workout_exercise_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    workout_plan_id = db.Column(
+        db.Integer,
+        db.ForeignKey(f"{add_prefix_for_prod('workout_plans')}.plan_id"),
+        nullable=False,
+    )
+    exercise_id = db.Column(
+        db.Integer,
+        db.ForeignKey(f"{add_prefix_for_prod('exercises')}.exercise_id"),
+        nullable=False,
+    )
+    sets_target = db.Column(db.Integer, nullable=False)
+    reps_target = db.Column(db.Integer, nullable=False)
+    weight_target = db.Column(db.Numeric, nullable=False)
+    sets_completed = db.Column(db.Integer, nullable=True)
+    reps_completed = db.Column(db.Integer, nullable=True)
+    weight_used = db.Column(db.Numeric, nullable=True)
+
+    # //*====> Relationships <====
+    workout_plan = db.relationship("WorkoutPlan", back_populates="workout_exercises")
+    exercise = db.relationship("Exercise", back_populates="workout_exercises")
+
+    def to_dict(self):
+        return {
+            "workout_exercise_id": self.workout_exercise_id,
+            "workout_plan_id": self.workout_plan_id,
+            "exercise_id": self.exercise_id,
+            "sets_target": self.sets_target,
+            "reps_target": self.reps_target,
+            "weight_target": self.weight_target,
+            "sets_completed": self.sets_completed,
+            "reps_completed": self.reps_completed,
+            "weight_used": self.weight_used,
+        }
