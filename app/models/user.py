@@ -22,7 +22,7 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
-    # //*====> One-to-Many <====
+    # //*====> Relationships <====
     workout_plans = db.relationship(
         "WorkoutPlan",
         back_populates="user",
@@ -35,9 +35,6 @@ class User(db.Model, UserMixin):
     # )
     # nutrition_profiles = db.relationship("NutritionProfile", back_populates="user")
     # body_measurements = db.relationship("BodyMeasurement", back_populates="user")
-
-    # //*====> Many-to-Many <====
-    # insert association table here if needed later
 
     @validates("first_name")
     def validate_first_name(self, _, val):

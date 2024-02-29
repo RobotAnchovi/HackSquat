@@ -13,7 +13,7 @@ def create_workout_plan():
     form = WorkoutPlanForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate():
-        new_plan = WorkoutPlan(
+        new_plan = WorkoutPlan(  # type: ignore
             user_id=current_user.id,
             name=form.name.data,
             description=form.data["description"],

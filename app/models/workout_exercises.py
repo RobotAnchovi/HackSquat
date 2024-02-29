@@ -9,15 +9,15 @@ class WorkoutExercise(db.Model):
     if environment == "production":
         __table_args__ = {"schema": SCHEMA}
 
-    workout_exercise_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    workout_plan_id = db.Column(
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    workout_id = db.Column(
         db.Integer,
-        db.ForeignKey(f"{add_prefix_for_prod('workout_plans')}.plan_id"),
+        db.ForeignKey(f"{add_prefix_for_prod('workout')}.id"),
         nullable=False,
     )
     exercise_id = db.Column(
         db.Integer,
-        db.ForeignKey(f"{add_prefix_for_prod('exercises')}.exercise_id"),
+        db.ForeignKey(f"{add_prefix_for_prod('exercises')}.id"),
         nullable=False,
     )
     # ^ Fields for weight-based exercises
@@ -36,13 +36,13 @@ class WorkoutExercise(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     # //*====> Relationships <====
-    workout_plan = db.relationship("WorkoutPlan", back_populates="workout_exercises")
+    workout = db.relationship("Workout", back_populates="workout_exercises")
     exercise = db.relationship("Exercise", back_populates="workout_exercises")
 
     def to_dict(self):
         return {
-            "workout_exercise_id": self.workout_exercise_id,
-            "workout_plan_id": self.workout_plan_id,
+            "id": self.id,
+            "workout_id": self.workout_id,
             "exercise_id": self.exercise_id,
             "sets_target": self.sets_target,
             "reps_target": self.reps_target,
