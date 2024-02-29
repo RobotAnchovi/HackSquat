@@ -1,7 +1,8 @@
+from datetime import datetime
+import uuid
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.orm import validates
-import uuid
-from datetime import datetime
+from sqlalchemy.dialects.postgresql import UUID
 
 
 class Exercise(db.Model):
@@ -10,11 +11,13 @@ class Exercise(db.Model):
     if environment == "production":
         __table_args__ = {"schema": SCHEMA}
 
-    exercise_id = db.Column(db.UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    exercise_id = db.Column(
+        db.String(36), primary_key=True, default=lambda: str(uuid.uuid4())
+    )
     user_id = db.Column(
-        db.UUID(as_uuid=True),
+        db.String(36),
         db.ForeignKey(f"{add_prefix_for_prod('users')}.id"),
-        nullable=False,
+        nullable=True,
     )
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=True)

@@ -29,8 +29,9 @@ class User(db.Model, UserMixin):
         lazy="select",
         cascade="delete, delete-orphan",
     )
-    # exercises = db.relationship(
-    #     "Exercise", back_populates="user", cascade="all, delete"
+    exercises = db.relationship(
+        "Exercise", back_populates="user", cascade="all, delete"
+    )
     # )
     # nutrition_profiles = db.relationship("NutritionProfile", back_populates="user")
     # body_measurements = db.relationship("BodyMeasurement", back_populates="user")
