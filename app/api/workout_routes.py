@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from app.models import db, Workout
 from app.forms import WorkoutForm
 from sqlalchemy.exc import IntegrityError, DataError
+from sqlalchemy.orm import joinedload
 
 workout_routes = Blueprint("workouts", __name__)
 
@@ -27,7 +28,7 @@ def create_workout():
             )
             db.session.add(workout)
             db.session.commit()
-            return jsonify(workout.to_dict()), 201
+            return jsonify(workout.to_dict()), 201  # type: ignore
         except IntegrityError:
             db.session.rollback()
             return jsonify({"errors": "Workout already exists"}), 400
@@ -37,23 +38,32 @@ def create_workout():
     return jsonify({"errors": form.errors}), 400
 
 
-# //*====> GET Workouts for a User <====
+# //~====> GET Workouts for a User <====
 @workout_routes.route("/user/<int:user_id>", methods=["GET"])
 @login_required
 def get_workouts(user_id):
     if user_id != current_user.id:
         return jsonify({"errors": "Unauthorized"}), 401
-    workouts = Workout.query.filter_by(user_id=user_id).all()
-    return jsonify([workout.to_dict() for workout in workouts]), 200
+    workouts = (
+        Workout.query.options(joinedload(Workout.workout_exercises))  # type: ignore
+        .filter_by(user_id=user_id)
+        .all()
+    )
+    return (
+        jsonify([workout.to_dict(include_exercises=True) for workout in workouts]),
+        200,
+    )
 
 
-# //*====> GET a single workout <====
+# //~====> GET a single workout <====
 @workout_routes.route("/<int:workout_id>", methods=["GET"])
 @login_required
 def get_workout_details(workout_id):
-    workout = Workout.query.get(workout_id)
+    workout = Workout.query.options(joinedload(Workout.workout_exercises)).get(  # type: ignore
+        workout_id
+    )
     if workout and workout.user_id == current_user.id:
-        return jsonify(workout.to_dict()), 200
+        return jsonify(workout.to_dict(include_exercises=True)), 200
     return jsonify({"errors": "Workout not found or unauthorized"}), 404
 
 

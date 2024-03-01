@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from app.models import db, WorkoutExercise, Workout
 from app.forms import WorkoutExerciseForm
+from sqlalchemy.orm import joinedload
 
 workout_exercises_routes = Blueprint("workout_exercises", __name__)
 
@@ -38,13 +39,22 @@ def create_workout_exercise():
     return jsonify({"errors": form.errors}), 400
 
 
-# //*====> GET Workout Exercises for a Workout <====
+# //~====> GET Workout Exercises for a Workout <====
 @workout_exercises_routes.route("/workout/<int:workout_id>/exercises", methods=["GET"])
 @login_required
 def get_workout_exercises(workout_id):
-    workout_exercises = WorkoutExercise.query.filter_by(workout_id=workout_id).all()
+    workout_exercises = (
+        WorkoutExercise.query.options(joinedload(WorkoutExercise.exercise))  # type: ignore
+        .filter(WorkoutExercise.workout_id == workout_id)
+        .all()
+    )
     return (
-        jsonify([workout_exercise.to_dict() for workout_exercise in workout_exercises]),
+        jsonify(
+            [
+                workout_exercise.to_dict(include_exercise=True)
+                for workout_exercise in workout_exercises
+            ]
+        ),
         200,
     )
 

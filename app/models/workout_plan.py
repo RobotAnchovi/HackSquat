@@ -36,8 +36,8 @@ class WorkoutPlan(db.Model):
             raise ValueError("Description must not exceed 500 characters.")
         return value
 
-    def to_dict(self):
-        return {
+    def to_dict(self, include_workouts=False):
+        data = {
             "plan_id": self.plan_id,
             "user_id": self.user_id,
             "name": self.name,
@@ -45,3 +45,6 @@ class WorkoutPlan(db.Model):
             "created_at": self.created_at.strftime("%Y-%m-%d %H:%M:%S"),
             "updated_at": self.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
         }
+        if include_workouts:
+            data["workouts"] = [workout.to_dict() for workout in list(self.workouts)]  # type: ignore
+        return data

@@ -12,14 +12,15 @@ class WorkoutExercise(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     workout_id = db.Column(
         db.Integer,
-        db.ForeignKey(f"{add_prefix_for_prod('workout')}.id"),
+        db.ForeignKey(f"{add_prefix_for_prod('workouts')}.id"),
         nullable=False,
     )
+    # ^ Relationship w/ Exercise model
     exercise_id = db.Column(
-        db.Integer,
-        db.ForeignKey(f"{add_prefix_for_prod('exercises')}.id"),
-        nullable=False,
+        db.Integer, db.ForeignKey("exercises.exercise_id"), nullable=False
     )
+    exercise = db.relationship("Exercise", back_populates="workout_exercises")
+
     # ^ Fields for weight-based exercises
     sets_target = db.Column(db.Integer, nullable=False)
     reps_target = db.Column(db.Integer, nullable=False)
@@ -39,8 +40,8 @@ class WorkoutExercise(db.Model):
     workout = db.relationship("Workout", back_populates="workout_exercises")
     exercise = db.relationship("Exercise", back_populates="workout_exercises")
 
-    def to_dict(self):
-        return {
+    def to_dict(self, include_exercise=False):
+        data = {
             "id": self.id,
             "workout_id": self.workout_id,
             "exercise_id": self.exercise_id,
@@ -55,3 +56,8 @@ class WorkoutExercise(db.Model):
             "created_at": self.created_at.strftime("%Y-%m-%d %H:%M:%S"),
             "updated_at": self.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
         }
+
+        if include_exercise and self.exercise:
+            data["exercise"] = self.exercise.to_dict()
+
+        return data

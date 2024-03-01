@@ -33,22 +33,24 @@ class Workout(db.Model):
 
     # //*====> Relationships <====
     workout_plan = db.relationship("WorkoutPlan", back_populates="workouts")
-    user = db.relationship(
-        "User", backref="workouts"
-    )  # ^ For direct user-workout queries
+    user = db.relationship("User", back_populates="workouts")
+    # ^ For direct user-workout queries
     workout_exercises = db.relationship("WorkoutExercise", back_populates="workout")
 
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "workout_plan_id": self.workout_plan_id,
-            "user_id": self.user_id,
-            "date": self.date.isoformat() if self.date else None,
-            "duration": self.duration,
-            "intensity": self.intensity,
-            "location": self.location,
-            "status": self.status,
-            "notes": self.notes,
-            "created_at": self.created_at.strftime("%Y-%m-%d %H:%M:%S"),
-            "updated_at": self.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
-        }
+
+def to_dict(self, include_exercises=False):
+    workout_dict = {
+        "id": self.id,
+        "workout_plan_id": self.workout_plan_id,
+        "user_id": self.user_id,
+        "date": self.date.isoformat() if self.date else None,
+        "notes": self.notes,
+        "created_at": self.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+        "updated_at": self.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
+    }
+
+    if include_exercises:
+        workout_dict["exercises"] = [
+            exercise.to_dict() for exercise in self.workout_exercises
+        ]
+    return workout_dict
