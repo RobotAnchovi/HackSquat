@@ -69,10 +69,61 @@ def upgrade():
         ),
         sa.PrimaryKeyConstraint("plan_id"),
     )
+    op.create_table(
+        "workouts",
+        sa.Column("id", sa.Integer(), autoincrement=True, nullable=False),
+        sa.Column("workout_plan_id", sa.Integer(), nullable=True),
+        sa.Column("user_id", sa.Integer(), nullable=False),
+        sa.Column("date", sa.Date(), nullable=False),
+        sa.Column("duration", sa.Integer(), nullable=True),
+        sa.Column("intensity", sa.Integer(), nullable=True),
+        sa.Column("location", sa.String(length=50), nullable=True),
+        sa.Column("status", sa.String(length=50), nullable=False),
+        sa.Column("notes", sa.Text(), nullable=True),
+        sa.Column("created_at", sa.DateTime(), nullable=True),
+        sa.Column("updated_at", sa.DateTime(), nullable=True),
+        sa.ForeignKeyConstraint(
+            ["user_id"],
+            ["users.id"],
+        ),
+        sa.ForeignKeyConstraint(
+            ["workout_plan_id"],
+            ["workout_plans.plan_id"],
+        ),
+        sa.PrimaryKeyConstraint("id"),
+    )
+    op.create_table(
+        "workout_exercises",
+        sa.Column("id", sa.Integer(), autoincrement=True, nullable=False),
+        sa.Column("workout_id", sa.Integer(), nullable=False),
+        sa.Column("exercise_id", sa.Integer(), nullable=False),
+        sa.Column("sets_target", sa.Integer(), nullable=False),
+        sa.Column("reps_target", sa.Integer(), nullable=False),
+        sa.Column("weight_target", sa.Numeric(), nullable=False),
+        sa.Column("sets_completed", sa.Integer(), nullable=True),
+        sa.Column("reps_completed", sa.Integer(), nullable=True),
+        sa.Column("weight_used", sa.Numeric(), nullable=True),
+        sa.Column("duration_minutes", sa.Integer(), nullable=True),
+        sa.Column("distance_km", sa.Numeric(), nullable=True),
+        sa.Column("created_at", sa.DateTime(), nullable=True),
+        sa.Column("updated_at", sa.DateTime(), nullable=True),
+        sa.ForeignKeyConstraint(
+            ["exercise_id"],
+            ["exercises.exercise_id"],
+        ),
+        sa.ForeignKeyConstraint(
+            ["workout_id"],
+            ["workouts.id"],
+        ),
+        sa.PrimaryKeyConstraint("id"),
+    )
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE exercises SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE workout_plans SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE workouts SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE workout_exercises SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 
@@ -81,4 +132,6 @@ def downgrade():
     op.drop_table("workout_plans")
     op.drop_table("exercises")
     op.drop_table("users")
+    op.drop_table("workouts")
+    op.drop_table("workout_exercises")
     # ### end Alembic commands ###
