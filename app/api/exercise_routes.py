@@ -13,7 +13,7 @@ def create_exercise():
     form = ExerciseForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate():
-        new_exercise = Exercise(  # type: ignore
+        new_exercise = Exercise(
             user_id=current_user.id,
             name=form.name.data,
             description=form.description.data,
@@ -64,19 +64,19 @@ def update_exercise(exercise_id):
     )
 
     # ^ Convert exercise.user_id to integer for comparison
-    if int(exercise.user_id) != current_user.id:  # type: ignore
-        print(exercise.user_id, current_user.id)  # type: ignore
+    if int(exercise.user_id) != current_user.id:
+        print(exercise.user_id, current_user.id)
         return jsonify({"errors": "Unauthorized"}), 403
 
     form = ExerciseForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate():
-        exercise.name = form.name.data  # type: ignore
-        exercise.description = form.description.data  # type: ignore
-        exercise.category = form.category.data  # type: ignore
-        exercise.is_public = form.is_public.data  # type: ignore
+        exercise.name = form.name.data
+        exercise.description = form.description.data
+        exercise.category = form.category.data
+        exercise.is_public = form.is_public.data
         db.session.commit()
-        return jsonify(exercise.to_dict()), 200  # type: ignore
+        return jsonify(exercise.to_dict()), 200
     else:
         return jsonify({"errors": form.errors}), 400
 
@@ -86,9 +86,9 @@ def update_exercise(exercise_id):
 @login_required
 def delete_exercise(exercise_id):
     exercise = Exercise.query.get(exercise_id)
-    # Debugging output
-    if int(exercise.user_id) != current_user.id:  # type: ignore
-        print(exercise.user_id, current_user.id)  # type: ignore
+    # ^ Debugging output
+    if int(exercise.user_id) != current_user.id:
+        print(exercise.user_id, current_user.id)
         return jsonify({"errors": "Unauthorized"}), 403
 
     db.session.delete(exercise)
