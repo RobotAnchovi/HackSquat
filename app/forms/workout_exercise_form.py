@@ -1,9 +1,12 @@
 from flask_wtf import FlaskForm
 from wtforms import IntegerField, DecimalField, BooleanField
 from wtforms.validators import NumberRange, Optional
+from wtforms.validators import DataRequired
 
 
 class WorkoutExerciseForm(FlaskForm):
+    workout_id = IntegerField("Workout ID", validators=[DataRequired()])
+    exercise_id = IntegerField("Exercise ID", validators=[DataRequired()])
     # ^ Fields for weight-based exercises
     sets_target = IntegerField(
         "Sets Target",

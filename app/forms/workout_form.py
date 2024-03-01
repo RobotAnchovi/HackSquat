@@ -57,12 +57,12 @@ class WorkoutForm(FlaskForm):
     )
 
     # ^ Custom validation methods
-    def validate_date(self, form, field):
+    def validate_date(self, field):
         # ^ Ensure the workout date is not in the past
         if field.data < date.today():
             raise ValidationError("Workout date cannot be in the past.")
 
-    def validate_workout_plan_id(self, form, field):
+    def validate_workout_plan_id(self, field):
         # ^ Ensure the workout_plan_id exists in the database if provided
         if field.data:
             workout_plan = WorkoutPlan.query.get(field.data)

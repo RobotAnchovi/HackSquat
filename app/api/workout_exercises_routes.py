@@ -20,8 +20,8 @@ def create_workout_exercise():
             return jsonify({"errors": "Workout not found."}), 404
         if workout.user_id != current_user.id:
             return jsonify({"errors": "Unauthorized"}), 403
-        workout_exercise = WorkoutExercise(  # type: ignore
-            workout_id=workout_id,
+        workout_exercise = WorkoutExercise(
+            workout_id=form.data["workout_id"],
             exercise_id=form.data["exercise_id"],
             sets_target=form.data["sets_target"],
             reps_target=form.data["reps_target"],
@@ -44,19 +44,19 @@ def create_workout_exercise():
 @login_required
 def get_workout_exercises(workout_id):
     workout_exercises = (
-        WorkoutExercise.query.options(joinedload(WorkoutExercise.exercise))  # type: ignore
+        WorkoutExercise.query.options(joinedload(WorkoutExercise.exercise))
         .filter(WorkoutExercise.workout_id == workout_id)
         .all()
     )
-    return (
-        jsonify(
-            [
-                workout_exercise.to_dict(include_exercise=True)
-                for workout_exercise in workout_exercises
-            ]
-        ),
-        200,
-    )
+
+    if workout_exercises:
+        exercise_data = [
+            workout_exercise.to_dict(include_exercise=True)
+            for workout_exercise in workout_exercises
+        ]
+        return jsonify(exercise_data), 200
+    else:
+        return jsonify({"errors": "Workout exercises not found."}), 404
 
 
 # //*====> UPDATE a workout exercise <====

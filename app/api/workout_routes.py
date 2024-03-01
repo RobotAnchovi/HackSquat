@@ -12,7 +12,7 @@ workout_routes = Blueprint("workouts", __name__)
 @workout_routes.route("/", methods=["POST"])
 @login_required
 def create_workout():
-    form = WorkoutForm()
+    form = WorkoutForm(data=request.json)
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate():
         try:
@@ -28,7 +28,7 @@ def create_workout():
             )
             db.session.add(workout)
             db.session.commit()
-            return jsonify(workout.to_dict()), 201  # type: ignore
+            return workout.to_dict(), 201
         except IntegrityError:
             db.session.rollback()
             return jsonify({"errors": "Workout already exists"}), 400

@@ -15,11 +15,9 @@ class WorkoutExercise(db.Model):
         db.ForeignKey(f"{add_prefix_for_prod('workouts')}.id"),
         nullable=False,
     )
-    # ^ Relationship w/ Exercise model
     exercise_id = db.Column(
         db.Integer, db.ForeignKey("exercises.exercise_id"), nullable=False
     )
-    exercise = db.relationship("Exercise", back_populates="workout_exercises")
 
     # ^ Fields for weight-based exercises
     sets_target = db.Column(db.Integer, nullable=False)

@@ -16,28 +16,28 @@ def seed_workout_plans():
     try:
         # ^ Define a list of workout plans to add
         workout_plans = [
-            WorkoutPlan(  # type: ignore
+            WorkoutPlan(
                 user_id=user.id,
                 name="Beginner Full Body",
                 description="A full-body workout plan suitable for beginners. Focus on compound movements.",
                 created_at=datetime.now() - timedelta(days=10),
                 updated_at=datetime.now() - timedelta(days=5),
             ),
-            WorkoutPlan(  # type: ignore
+            WorkoutPlan(
                 user_id=user.id,
                 name="Advanced Split Routine",
                 description="An advanced workout plan focusing on a different muscle group each day.",
                 created_at=datetime.now() - timedelta(days=20),
                 updated_at=datetime.now() - timedelta(days=10),
             ),
-            WorkoutPlan(  # type: ignore
+            WorkoutPlan(
                 user_id=user.id,
                 name="Intermediate Push-Pull Routine",
                 description="An intermediate workout plan focusing on push and pull movements.",
                 created_at=datetime.now() - timedelta(days=30),
                 updated_at=datetime.now() - timedelta(days=15),
             ),
-            WorkoutPlan(  # type: ignore
+            WorkoutPlan(
                 user_id=user.id,
                 name="Cardio and Core",
                 description="A workout plan focusing on cardio and core exercises.",
