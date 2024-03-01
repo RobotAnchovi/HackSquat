@@ -38,8 +38,8 @@ def seed_all_tables():
 
 
 def unseed_all_tables():
-    undo_users()
-    undo_workout_plans()
-    undo_exercises()
-    undo_workouts()
     undo_workout_exercises()
+    undo_workouts()
+    undo_exercises()
+    undo_workout_plans()
+    undo_users()
