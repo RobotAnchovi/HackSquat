@@ -1,4 +1,3 @@
-from tkinter import W
 from app.models import db, Workout, User, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import datetime, timedelta
