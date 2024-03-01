@@ -16,7 +16,9 @@ class WorkoutExercise(db.Model):
         nullable=False,
     )
     exercise_id = db.Column(
-        db.Integer, db.ForeignKey(f"{('exercises')}.exercise_id"), nullable=False
+        db.Integer,
+        db.ForeignKey(f"{add_prefix_for_prod('exercises')}.exercise_id"),
+        nullable=False,
     )
 
     # ^ Fields for weight-based exercises
