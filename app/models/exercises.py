@@ -1,8 +1,6 @@
 from datetime import datetime
-import uuid
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.orm import validates
-from sqlalchemy.dialects.postgresql import UUID
 
 
 class Exercise(db.Model):
