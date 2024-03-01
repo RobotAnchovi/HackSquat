@@ -49,6 +49,7 @@ class WorkoutExerciseForm(FlaskForm):
             Optional(),
             NumberRange(min=0.1, message="Weight used must be more than 0."),
         ],
+        default=0.1,
     )
 
     # ^ Fields for cardio activities
@@ -97,12 +98,8 @@ class WorkoutExerciseForm(FlaskForm):
                 self.reps_target.errors = list(
                     self.reps_target.errors
                 )  # ^ Change the type to list
-                self.sets_target.errors.append(
-                    "Sets target is required for weight-based exercises."
-                )
-                self.reps_target.errors.append(
-                    "Reps target is required for weight-based exercises."
-                )
+                self.sets_target.errors.append("Sets target is required exercises.")
+                self.reps_target.errors.append("Reps target is required exercises.")
                 is_valid = False
 
         return is_valid
