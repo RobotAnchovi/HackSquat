@@ -1,6 +1,6 @@
 export const getAvatarUrl = (url) => {
   if (url) return url;
-  return '/favicon.ico';
+  return '/react-vite/public/icons8-weightlifting-50.png';
 };
 
 export const isImageValid = (imageName) => {
