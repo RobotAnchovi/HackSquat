@@ -70,6 +70,15 @@ def seed_workouts():
                 status="Skipped",
                 notes="Not feeling well today.",
             ),
+            Workout(
+                user_id=user.id,
+                date=datetime.now(),
+                duration=60,
+                intensity=5,
+                location="Home",
+                status="Completed",
+                notes="Great workout today!",
+            ),
         ]
         # ^ Add workouts to the session and commit
         db.session.bulk_save_objects(workouts)
