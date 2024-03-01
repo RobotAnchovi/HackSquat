@@ -1,3 +1,7 @@
+import tracemalloc
+
+tracemalloc.start()
+
 import os
 from flask import Flask, request, redirect
 from flask_cors import CORS
@@ -13,6 +17,7 @@ from .api.workout_exercises_routes import workout_exercises_routes
 from .api.workout_routes import workout_routes
 from .seeds import seed_commands
 from .config import Config
+
 
 app = Flask(__name__, static_folder="../react-vite/dist", static_url_path="/")
 
@@ -85,6 +90,23 @@ def api_help():
         if rule.endpoint != "static"
     }
     return route_list
+
+
+# Memory debugging route
+@app.route("/debug/memory")
+def debug_memory():
+    if not tracemalloc.is_tracing():
+        tracemalloc.start()
+
+    snapshot = tracemalloc.take_snapshot()
+    top_stats = snapshot.statistics("lineno")
+
+    result = []
+    for stat in top_stats[:20]:  # Adjust the slice for more or fewer lines
+        result.append(str(stat))
+
+    # Combine the results into a multi-line string and return as a response
+    return "\n".join(result), 200
 
 
 @app.route("/", defaults={"path": ""})

@@ -41,12 +41,15 @@ def password_check_len(form, field):
 def validate_photo_url(form, field):
     if field.data:
         try:
-            content_type = urlopen(field.data).info()["content-type"]
-        except:
-            raise ValidationError("Must be a valid URL.")
-        if "image" not in content_type:
-            raise ValidationError("Image must be .png, .jpg, .jpeg, or .gif!")
-        return False
+            with urlopen(field.data) as response:
+                content_type = response.info().get_content_type()
+                if not any(
+                    ext in content_type for ext in ["png", "jpg", "jpeg", "gif"]
+                ):
+                    raise ValidationError("Image must be .png, .jpg, .jpeg, or .gif!")
+        except Exception as e:
+            # Catches any exception, which could be from an invalid URL or a failed connection
+            raise ValidationError(f"Error validating URL: {str(e)}")
 
 
 class UpdateUserForm(FlaskForm):

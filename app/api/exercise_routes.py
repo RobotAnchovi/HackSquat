@@ -60,7 +60,7 @@ def update_exercise(exercise_id):
     exercise = Exercise.query.get(exercise_id)
     # Debugging output
     print(
-        f"Comparing user IDs: exercise.user_id={exercise.user_id} ({type(exercise.user_id)}) with current_user.id={current_user.id} ({type(current_user.id)})"  # type: ignore
+        f"Comparing user IDs: exercise.user_id={exercise.user_id} ({type(exercise.user_id)}) with current_user.id={current_user.id} ({type(current_user.id)})"
     )
 
     # ^ Convert exercise.user_id to integer for comparison

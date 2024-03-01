@@ -12,7 +12,7 @@ class Workout(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     workout_plan_id = db.Column(
         db.Integer,
-        db.ForeignKey(f"{add_prefix_for_prod('workout_plans')}.id"),
+        db.ForeignKey(f"{add_prefix_for_prod('workout_plans')}.plan_id"),
         nullable=True,
     )
     user_id = db.Column(

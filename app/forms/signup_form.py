@@ -43,12 +43,13 @@ def password_check_len(form, field):
 def validate_photo_url(form, field):
     if field.data:
         try:
-            content_type = urlopen(field.data).info()["content-type"]
-        except:
-            raise ValidationError("Must be a valid URL.")
-        if "image" not in content_type:
-            raise ValidationError("Photo must be a valid image URL!")
-        return False
+            with urlopen(field.data) as response:
+                content_type = response.info()["content-type"]
+                if "image" not in content_type:
+                    raise ValidationError("Photo must be a valid image URL!")
+        except Exception as e:
+            # This will catch both URL opening errors and non-image content type errors
+            raise ValidationError(f"Error validating URL: {str(e)}")
 
 
 class SignUpForm(FlaskForm):
