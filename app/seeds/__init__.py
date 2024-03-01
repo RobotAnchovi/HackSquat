@@ -31,8 +31,8 @@ def seed_reset():
 
 def seed_all_tables():
     seed_users()
-    seed_workout_plans()
     seed_exercises()
+    seed_workout_plans()
     seed_workouts()
     seed_workout_exercises()
 
@@ -40,6 +40,6 @@ def seed_all_tables():
 def unseed_all_tables():
     undo_workout_exercises()
     undo_workouts()
-    undo_exercises()
     undo_workout_plans()
+    undo_exercises()
     undo_users()
