@@ -9,12 +9,14 @@ import sessionReducer from './session';
 import exercisesReducer from './exercises';
 import workoutPlansReducer from './workoutPlans';
 import workoutExercisesReducer from './workoutExercises';
+import workoutsReducer from './workouts';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   exercises: exercisesReducer,
   workoutPlans: workoutPlansReducer,
   workoutExercises: workoutExercisesReducer,
+  workouts: workoutsReducer,
 });
 
 let enhancer;
