@@ -124,10 +124,10 @@ export const logout = () => async (dispatch) => {
   dispatch(removeUser());
 };
 
-// Custom selectors
+//^ Custom selectors
 export const sessionUser = (state) => state.session.user;
 
-// Reducer
+//^ Reducer
 const initialState = { user: null };
 
 function sessionReducer(state = initialState, action) {
