@@ -1,4 +1,5 @@
 import { csrfFetch } from './csrf';
+//! ALL ROUTES HAVE BEEN VERIFIED
 
 //*====> Action Types for exercises <====
 const LOAD_EXERCISES = 'exercises/LOAD';

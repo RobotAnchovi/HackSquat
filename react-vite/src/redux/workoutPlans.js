@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 //*====> Actions <====
 const GET_WORKOUT_PLANS = 'workoutPlans/GET';
+const GET_WORKOUT_PLAN = 'workoutPlans/GET_ONE';
 const ADD_WORKOUT_PLAN = 'workoutPlans/ADD';
 const DELETE_WORKOUT_PLAN = 'workoutPlans/DELETE';
 const UPDATE_WORKOUT_PLAN = 'workoutPlans/UPDATE';
@@ -10,6 +11,11 @@ const UPDATE_WORKOUT_PLAN = 'workoutPlans/UPDATE';
 const getWorkoutPlansAction = (workoutPlans) => ({
   type: GET_WORKOUT_PLANS,
   payload: workoutPlans,
+});
+
+const getWorkoutPlanAction = (workoutPlan) => ({
+  type: GET_WORKOUT_PLAN,
+  payload: workoutPlan,
 });
 
 const addWorkoutPlanAction = (workoutPlan) => ({
@@ -28,14 +34,27 @@ const updateWorkoutPlanAction = (workoutPlan) => ({
 });
 
 //*====> Thunks <====
-export const getWorkoutPlans = () => async (dispatch) => {
-  const response = await csrfFetch('/api/workout-plans');
+export const getWorkoutPlans = (userId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/workout-plans/user/${userId}`);
   if (response.ok) {
     const workoutPlans = await response.json();
     dispatch(getWorkoutPlansAction(workoutPlans));
   } else {
     const error = await response.json();
     throw new Error(`Error loading workout plans: ${error.message}`);
+  }
+};
+
+export const getWorkoutPlan = (userId, planId) => async (dispatch) => {
+  const response = await csrfFetch(
+    `/api/workout-plans/user/${userId}/${planId}`
+  );
+  if (response.ok) {
+    const workoutPlan = await response.json();
+    dispatch(getWorkoutPlanAction(workoutPlan));
+  } else {
+    const error = await response.json();
+    throw new Error(`Error loading workout plan: ${error.message}`);
   }
 };
 
@@ -88,6 +107,8 @@ const initialState = {
 export default function workoutPlansReducer(state = initialState, action) {
   switch (action.type) {
     case GET_WORKOUT_PLANS:
+      return { ...state, workoutPlans: action.payload };
+    case GET_WORKOUT_PLAN:
       return { ...state, workoutPlans: action.payload };
     case ADD_WORKOUT_PLAN:
       return {
