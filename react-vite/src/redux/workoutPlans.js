@@ -72,32 +72,48 @@ export const addWorkoutPlan = (workoutPlanData) => async (dispatch) => {
   }
 };
 
-export const deleteWorkoutPlan = (workoutPlanId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/workout-plans/${workoutPlanId}`, {
-    method: 'DELETE',
-  });
-  if (response.ok) {
-    const workoutPlan = await response.json();
-    dispatch(deleteWorkoutPlanAction(workoutPlan.id));
-  } else {
-    const error = await response.json();
-    throw new Error(`Error deleting workout plan: ${error.message}`);
-  }
-};
+export const deleteWorkoutPlan =
+  (userId, workoutPlanId) => async (dispatch) => {
+    const response = await csrfFetch(
+      `/api/workout-plans/user/${userId}/${workoutPlanId}`,
+      {
+        method: 'DELETE',
+      }
+    );
+    if (response.ok) {
+      const workoutPlan = await response.json();
+      dispatch(deleteWorkoutPlanAction(workoutPlan.id));
+    } else {
+      const error = await response.json();
+      throw new Error(`Error deleting workout plan: ${error.message}`);
+    }
+  };
 
-export const updateWorkoutPlan = (workoutPlanData) => async (dispatch) => {
-  const response = await csrfFetch(`/api/workout-plans/${workoutPlanData.id}`, {
-    method: 'PUT',
-    body: JSON.stringify(workoutPlanData),
-  });
-  if (response.ok) {
-    const workoutPlan = await response.json();
-    dispatch(updateWorkoutPlanAction(workoutPlan));
-  } else {
-    const error = await response.json();
-    throw new Error(`Error updating workout plan: ${error.message}`);
-  }
-};
+export const updateWorkoutPlan =
+  (userId, plan_id, workoutPlanData) => async (dispatch) => {
+    console.log(
+      'updateWorkoutPlan thunk',
+      plan_id,
+      'for user:',
+      userId,
+      'with data:',
+      workoutPlanData
+    );
+    const response = await csrfFetch(
+      `/api/workout-plans/user/${userId}/${plan_id}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(workoutPlanData),
+      }
+    );
+    if (response.ok) {
+      const workoutPlan = await response.json();
+      dispatch(updateWorkoutPlanAction(workoutPlan));
+    } else {
+      const error = await response.json();
+      throw new Error(`Error updating workout plan: ${error.message}`);
+    }
+  };
 
 //*====> Reducer <====
 const initialState = {
@@ -125,8 +141,8 @@ export default function workoutPlansReducer(state = initialState, action) {
     case UPDATE_WORKOUT_PLAN:
       return {
         ...state,
-        workoutPlans: state.workoutPlans.map((workoutPlan) =>
-          workoutPlan.id === action.payload.id ? action.payload : workoutPlan
+        workoutPlans: state.workoutPlans.map((plan) =>
+          plan.plan_id === action.payload.plan_id ? action.payload : plan
         ),
       };
     default:

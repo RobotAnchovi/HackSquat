@@ -15,7 +15,7 @@ def create_workout_plan():
     form = WorkoutPlanForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate():
-        new_plan = WorkoutPlan(  # type: ignore
+        new_plan = WorkoutPlan(
             user_id=current_user.id,
             name=form.name.data,
             description=form.data["description"],
@@ -33,7 +33,7 @@ def get_user_workout_plans(user_id):
     if user_id != current_user.id:
         return jsonify({"errors": "Unauthorized"}), 403
     workout_plans = (
-        WorkoutPlan.query.options(joinedload(WorkoutPlan.workouts))  # type: ignore
+        WorkoutPlan.query.options(joinedload(WorkoutPlan.workouts))
         .filter(WorkoutPlan.user_id == user_id)
         .all()
     )
@@ -54,7 +54,7 @@ def get_workout_plan(user_id, plan_id):
     if user_id != current_user.id:
         return jsonify({"errors": "Unauthorized"}), 403
     plan = (
-        WorkoutPlan.query.options(joinedload(WorkoutPlan.workouts))  # type: ignore
+        WorkoutPlan.query.options(joinedload(WorkoutPlan.workouts))
         .filter_by(user_id=user_id, plan_id=plan_id)
         .first()
     )

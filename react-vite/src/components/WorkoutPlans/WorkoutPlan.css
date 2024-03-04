@@ -1,0 +1,32 @@
+.workout-plan-controls {
+  padding-bottom: 10px;
+}
+.workout-plan-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.workout-plan-table th,
+.workout-plan-table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid var(--input-text-color);
+}
+
+.clickable-plan-name {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--link-color);
+  text-align: left;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.clickable-plan-name:hover {
+  text-decoration: underline;
+}
+#unique-blinking-cursor.blinking-cursor {
+  margin-bottom: 0;
+}

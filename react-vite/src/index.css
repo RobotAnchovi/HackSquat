@@ -37,7 +37,7 @@ select:focus {
 }
 
 html {
-  scroll-behavior: smooth; /* Smooth scrolling for better UX */
+  scroll-behavior: smooth;
 }
 .disabled:hover,
 select[disabled]:hover {
