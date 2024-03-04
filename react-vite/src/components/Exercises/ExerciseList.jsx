@@ -130,6 +130,7 @@ const ExerciseList = () => {
                 <td>{exercise.name}</td>
                 <td>{exercise.category}</td>
                 <td className='exercise-actions'>
+                  <button className='add-to-plan-button'>Add to Plan</button>
                   {exercise.user_id && (
                     <>
                       <button

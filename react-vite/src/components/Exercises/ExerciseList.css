@@ -57,7 +57,7 @@
 .exercise-table th,
 .exercise-table td {
   text-align: left;
-  padding: 8px;
+  padding: 10px;
   border-bottom: 1px solid var(--input-text-color); /* Green borders separating entries */
 }
 
@@ -71,11 +71,10 @@
   background-color: var(--button-background); /* Hover effect for rows */
 }
 
-.edit-exercise-button,
-.delete-exercise-button {
+.edit-exercise-button {
   background-color: var(--button-background);
   color: var(--button-text-color);
-  margin-right: 10px;
+  margin-right: 5px;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -89,7 +88,9 @@
 
 .exercise-actions {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
 }
 .exercise-search-controls {
   display: flex;

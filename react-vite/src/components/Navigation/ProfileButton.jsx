@@ -6,12 +6,14 @@ import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import * as sessionActions from '../../redux/session';
+import { useNavigate } from 'react-router-dom';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const { setModalContent } = useModal();
   const ulRef = useRef();
+  const navigate = useNavigate();
 
   const toggleMenu = (e) => {
     e.stopPropagation();
@@ -40,6 +42,7 @@ function ProfileButton({ user }) {
       <h2 className='subheading alert-success'>Successfully Logged Out</h2>
     );
     closeMenu();
+    navigate('/');
   };
 
   return (
