@@ -1,21 +1,24 @@
 import { createBrowserRouter } from 'react-router-dom';
-// import LoginFormPage from '../components/LoginFormPage';
-// import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import HomePage from '../components/HomePage';
+import ExerciseList from '../components/Exercises/ExerciseList';
 
 export const router = createBrowserRouter([
   {
+    path: '/',
     element: <Layout />,
-    errorElement: <HomePage />,
     children: [
       {
-        path: '/',
+        index: true,
         element: <HomePage />,
       },
       {
+        path: 'exercises',
+        element: <ExerciseList />,
+      },
+      {
         path: '*',
-        element: <HomePage />,
+        element: <HomePage />, // Consider a dedicated 404 component for better UX
       },
     ],
   },

@@ -1,0 +1,113 @@
+/* ExerciseList.css */
+
+.exercise-list-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  background-color: var(
+    --modal-background-color
+  ); /* Lighter background for the container */
+}
+
+.exercise-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.exercise-search-input,
+.exercise-sort-select {
+  padding: 10px;
+  background-color: var(--input-background); /* Adjusted for consistency */
+  color: var(--input-text-color); /* Green text color */
+  border: 1px solid var(--text-color);
+  border-radius: 5px;
+}
+
+.exercise-search-input:focus,
+.exercise-sort-select:focus {
+  box-shadow: var(--box-shadow);
+  outline: none;
+}
+
+.add-exercise-button {
+  background-color: var(--button-background);
+  color: var(--button-text-color);
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-exercise-button:hover {
+  background-color: var(--text-color);
+  color: var(--background-color); /* Inverts colors on hover */
+}
+
+.exercise-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(
+    --modal-background-color
+  ); /* Lighter background for the table */
+}
+
+.exercise-table th,
+.exercise-table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid var(--input-text-color); /* Green borders separating entries */
+}
+
+.exercise-table th {
+  background-color: var(
+    --modal-background-color
+  ); /* Consistent background for headers */
+}
+
+.exercise-table tr:hover {
+  background-color: var(--button-background); /* Hover effect for rows */
+}
+
+.edit-exercise-button,
+.delete-exercise-button {
+  background-color: var(--button-background);
+  color: var(--button-text-color);
+  margin-right: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-exercise-button:hover,
+.delete-exercise-button:hover {
+  background-color: var(--text-color);
+  color: var(--background-color); /* Inverts colors on hover for buttons */
+}
+
+.exercise-actions {
+  display: flex;
+  justify-content: flex-start;
+}
+.exercise-search-controls {
+  display: flex;
+  gap: 10px;
+}
+.exercise-search-input,
+.exercise-sort-select {
+  /* flex-grow: 1; */
+  padding: 10px;
+  background-color: var(--input-background);
+  color: var(--input-text-color);
+  border: 1px solid var(--text-color);
+  border-radius: 5px;
+  height: 40px;
+  font-size: 16px;
+}
+.exercise-search-input:focus,
+.exercise-sort-select:focus {
+  box-shadow: var(--box-shadow);
+  outline: none;
+}
