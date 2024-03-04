@@ -59,7 +59,9 @@ const ExerciseList = () => {
 
   return (
     <div className='exercise-list-container'>
-      <h2>Exercises</h2>
+      <h2>
+        Exercises<span className='blinking-cursor'></span>
+      </h2>
       <div className='exercise-controls'>
         <div className='exercise-search-controls'>
           <input
