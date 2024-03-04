@@ -19,7 +19,7 @@
 
 .exercise-search-input,
 .exercise-sort-select {
-  padding: 10px;
+  /* padding: 10px; */
   background-color: var(--input-background); /* Adjusted for consistency */
   color: var(--input-text-color); /* Green text color */
   border: 1px solid var(--text-color);
@@ -94,16 +94,17 @@
 .exercise-search-controls {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 .exercise-search-input,
 .exercise-sort-select {
-  /* flex-grow: 1; */
-  padding: 10px;
+  flex-grow: 1;
+  /* padding: 10px; */
   background-color: var(--input-background);
   color: var(--input-text-color);
   border: 1px solid var(--text-color);
   border-radius: 5px;
-  height: 40px;
+  /* height: 35px; */
   font-size: 16px;
 }
 .exercise-search-input:focus,

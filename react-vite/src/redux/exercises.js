@@ -74,6 +74,9 @@ export const addExercise = (exerciseData) => async (dispatch) => {
 
 export const updateExercise =
   (exerciseId, exerciseData) => async (dispatch) => {
+    console.log(
+      `Updating exercise with ID: ${exerciseId}, Type: ${typeof exerciseId}`
+    );
     const response = await csrfFetch(`/api/exercises/${exerciseId}`, {
       method: 'PUT',
       body: JSON.stringify(exerciseData),
@@ -127,7 +130,9 @@ export default function exercisesReducer(state = initialState, action) {
       return {
         ...state,
         exercises: state.exercises.map((exercise) =>
-          exercise.id === action.exercise.id ? action.exercise : exercise
+          exercise.exercise_id === action.exercise.exercise_id
+            ? action.exercise
+            : exercise
         ),
       };
     case DELETE_EXERCISE:

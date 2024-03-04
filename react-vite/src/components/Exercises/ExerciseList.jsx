@@ -1,15 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  loadExercises,
-  // loadOneExercise,
-  // addExercise,
-  // updateExercise,
-  deleteExercise as deleteExerciseAction,
-} from '../../redux/exercises';
+import { loadExercises } from '../../redux/exercises';
 import './ExerciseList.css';
-// import ExerciseFormModal from './ExerciseFormModal';
-// import ExerciseEditModal from './ExerciseEditModal';
+import ExerciseFormModal from './ExerciseFormModal';
+import ExerciseEditModal from './ExerciseEditModal';
 
 const ExerciseList = () => {
   const dispatch = useDispatch();
@@ -17,6 +11,9 @@ const ExerciseList = () => {
   const [filteredExercises, setFilteredExercises] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('name');
+  const [showAddExerciseModal, setShowAddExerciseModal] = useState(false);
+  const [showEditExerciseModal, setShowEditExerciseModal] = useState(false);
+  const [selectedExercise, setSelectedExercise] = useState(null);
 
   useEffect(() => {
     dispatch(loadExercises());
@@ -53,8 +50,27 @@ const ExerciseList = () => {
     setFilteredExercises(searchResults);
   }, [searchTerm, exercises]);
 
-  const handleDeleteExercise = (exerciseId) => {
-    dispatch(deleteExerciseAction(exerciseId));
+  const openEditModal = (exercise) => {
+    setSelectedExercise(exercise);
+    setShowEditExerciseModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowAddExerciseModal(false);
+    setShowEditExerciseModal(false);
+    setSelectedExercise(null);
+  };
+
+  const refreshExercises = () => {
+    dispatch(loadExercises());
+  };
+
+  const removeExerciseFromState = (exerciseId) => {
+    setFilteredExercises(
+      filteredExercises.filter(
+        (exercise) => exercise.exercise_id !== exerciseId
+      )
+    );
   };
 
   return (
@@ -82,13 +98,23 @@ const ExerciseList = () => {
         </div>
         <button
           className='add-exercise-button'
-          onClick={() => {
-            /* Open Add Exercise Modal */
-          }}
+          onClick={() => setShowAddExerciseModal(true)}
         >
           Add Exercise
         </button>
       </div>
+      {showAddExerciseModal && <ExerciseFormModal onClose={handleCloseModal} />}
+      {showEditExerciseModal && selectedExercise && (
+        <ExerciseEditModal
+          exercise={selectedExercise}
+          onClose={handleCloseModal}
+          onExerciseUpdated={refreshExercises}
+          onExerciseDeleted={(exerciseId) => {
+            removeExerciseFromState(exerciseId);
+            refreshExercises();
+          }}
+        />
+      )}
       {filteredExercises.length > 0 ? (
         <table className='exercise-table'>
           <thead>
@@ -108,19 +134,9 @@ const ExerciseList = () => {
                     <>
                       <button
                         className='edit-exercise-button'
-                        onClick={() => {
-                          /* Open Edit Exercise Modal, passing exercise as prop */
-                        }}
+                        onClick={() => openEditModal(exercise)}
                       >
                         Edit
-                      </button>
-                      <button
-                        className='delete-exercise-button'
-                        onClick={() =>
-                          handleDeleteExercise(exercise.exercise_id)
-                        }
-                      >
-                        Delete
                       </button>
                     </>
                   )}

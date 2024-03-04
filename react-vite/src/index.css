@@ -27,6 +27,14 @@ input:focus {
   box-shadow: 0 0 10px var(--text-color, #33c633);
   outline: none;
 }
+textarea:focus {
+  box-shadow: 0 0 10px var(--text-color, #33c633);
+  outline: none;
+}
+select:focus {
+  box-shadow: 0 0 10px var(--text-color, #33c633);
+  outline: none;
+}
 
 html {
   scroll-behavior: smooth; /* Smooth scrolling for better UX */
@@ -57,6 +65,10 @@ button:hover {
   word-break: break-word;
 }
 .alert-success {
+}
+select {
+  background-color: var(--input-background);
+  color: var(--input-text-color);
 }
 
 form {
