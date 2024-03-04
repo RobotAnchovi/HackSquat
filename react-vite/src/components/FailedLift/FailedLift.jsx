@@ -1,7 +1,38 @@
-function FailedLift() {
+import { Link } from 'react-router-dom';
+
+const FailedLift = () => {
   return (
-    <h1 className='heading'>Not sure what happened! Please try again...</h1>
+    <div style={{ padding: '20px', textAlign: 'center' }}>
+      <h1>
+        404: Page Not Found<span className='blinking-cursor'></span>
+      </h1>
+      <p>But don&apos;t worry, we&apos;ve got something for you!</p>
+      <iframe
+        width='560'
+        height='315'
+        src='https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1'
+        title='YouTube video player'
+        frameBorder='0'
+        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+        allowfullscreen
+      ></iframe>
+      <br />
+      <Link
+        to='/'
+        style={{
+          marginTop: '20px',
+          display: 'inline-block',
+          textDecoration: 'none',
+          color: 'white',
+          backgroundColor: '#007bff',
+          padding: '10px 20px',
+          borderRadius: '5px',
+        }}
+      >
+        Go Home
+      </Link>
+    </div>
   );
-}
+};
 
 export default FailedLift;

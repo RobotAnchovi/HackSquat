@@ -3,6 +3,7 @@ import Layout from './Layout';
 import HomePage from '../components/HomePage';
 import ExerciseList from '../components/Exercises/ExerciseList';
 import WorkoutPlans from '../components/WorkoutPlans';
+import FailedLift from '../components/FailedLift';
 
 export const router = createBrowserRouter([
   {
@@ -22,8 +23,12 @@ export const router = createBrowserRouter([
         element: <WorkoutPlans />,
       },
       {
+        path: 'failed-lift',
+        element: <FailedLift />,
+      },
+      {
         path: '*',
-        element: <HomePage />, // Consider a dedicated 404 component for better UX
+        element: <FailedLift />,
       },
     ],
   },
