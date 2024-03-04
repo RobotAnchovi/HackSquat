@@ -16,9 +16,9 @@ const LandingPageModal = () => {
         className='fa-solid fa-circle-xmark close-landing-page-modal'
         onClick={onClose}
       ></i>
-      <div className='landing-page-to-minislack'>
+      <div className='landing-page-to-hacksquat'>
         <i className='fa-solid fa-people-roof'></i>
-        <h1>Welcom to HackSquat</h1>
+        <h1>Welcome to Hack/Squat</h1>
         <i className='fa-solid fa-people-roof'></i>
       </div>
       <p>For Developers who Deadlift</p>
@@ -37,7 +37,10 @@ const LandingPageModal = () => {
         squat at a time.
       </p>
       <br />
-      <p>HackSquat was created by a lifter, for lifters!</p>
+      <p>
+        HackSquat was created by a lifter, for lifters!
+        <span className='blinking-cursor'></span>
+      </p>
     </div>
   );
 };

@@ -12,6 +12,10 @@ function UserProfile({
   closeModal,
   showSettings = true,
 }) {
+  const handleImageError = (e) => {
+    e.target.src = '/icons8-weightlifting-100.png';
+  };
+
   const dispatch = useDispatch();
   if (!user) return;
 
@@ -27,7 +31,7 @@ function UserProfile({
     setModalContent(
       <ConfirmDeleteFormModal
         user={user}
-        text='Are you sure you want to cancel your account?'
+        text='Are you sure you want to delete your profile?'
         deleteCb={deleteUser}
         cancelDeleteCb={closeModal}
       />
@@ -38,8 +42,7 @@ function UserProfile({
     dispatch(sessionActions.deleteUser());
     setModalContent(
       <h2 className='subheading alert-success'>
-        Account is deleted successfully. You won&apos;t allow to signup with
-        this email or login again.
+        Profile is successfully deleted. Create a new profile to login again.
       </h2>
     );
   };
@@ -53,14 +56,15 @@ function UserProfile({
             className='user-profile-avatar'
             src={getAvatarUrl(user.profile_image_url)}
             alt='avatar'
+            onError={handleImageError}
           />
         </div>
         <div className='profile-content'>
           <div className='profile-titles'>
-            <div>First name</div>
-            <div>Last name</div>
-            <div>Username</div>
-            <div>Email</div>
+            <div>First: </div>
+            <div>Last: </div>
+            <div>Username: </div>
+            <div>Email: </div>
           </div>
           <div className='profile-details'>
             <div>{user.first_name}</div>
@@ -73,13 +77,13 @@ function UserProfile({
       {showSettings && (
         <div className='profile-btns'>
           <button className='btn-update' onClick={openUpdateUserForm}>
-            Update
+            Update Profile
           </button>
           <button className='btn-delete' onClick={openUpdatePasswordForm}>
             Change Password
           </button>
           <button className='btn-delete' onClick={openDeleteUserForm}>
-            Delete
+            Delete Profile
           </button>
         </div>
       )}

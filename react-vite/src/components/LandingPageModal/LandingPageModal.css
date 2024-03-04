@@ -1,0 +1,87 @@
+/* LandingPageModal.css */
+.landing-page-modal {
+  background-color: var(--modal-background-color, #1a1a1a);
+  color: var(--text-color, #33c633);
+  text-align: center;
+  padding: 20px;
+  border-radius: 20px;
+  height: fit-content;
+  width: fit-content;
+  animation: slide-in 1.5s ease-in-out;
+  box-shadow: 0 0 10px var(--text-color, #33c633);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translate(-50%, -100vh);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+.landing-page-modal.hidden {
+  display: none;
+}
+
+.landing-page-modal h1,
+.landing-page-modal p,
+.close-landing-page-modal,
+.fa-people-roof {
+  color: var(--text-color, #33c633); /* Making text consistently green */
+}
+
+.landing-page-modal p {
+  /* text-indent: 2em; */
+  line-height: 2;
+  /* margin-left: 15px; */
+  font-size: 15pt;
+}
+
+.close-landing-page-modal {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.fa-people-roof {
+  margin-left: -20px;
+}
+
+.landing-page-to-hacksquat {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Blinking cursor effect */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.blinking-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  margin-bottom: 5px;
+  width: 10px; /* Width of the cursor */
+  height: 19px; /* Ideally matching the line height or font size of the text */
+  background-color: var(--text-color, #33c633); /* Cursor color */
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+}
+
+@media screen and (max-width: 1020px) {
+  .landing-page-modal {
+    top: 20px;
+    width: 90%; /* More responsive for narrower screens */
+    height: auto; /* Adjusted for content fit */
+    margin: 0 auto; /* Center the modal */
+  }
+}

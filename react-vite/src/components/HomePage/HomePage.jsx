@@ -1,23 +1,59 @@
-// import { useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { formattedDate, formattedTime } from '../../utils/dateFormatter';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import LandingPageModal from '../LandingPageModal';
 // import { userIsValid } from '../../utils/user';
 // import { useModal } from '../../context/Modal';
-// import { sortDesc } from '../../utils/sort';
-// import Loading from '../Loading';
+import Loading from '../Loading';
 // import UserProfile from '../UserProfile';
-// import WelcomeModal from '../WelcomeModal';
-// import * as sessionActions from '../../redux/session';
+import * as sessionActions from '../../redux/session';
+
+const welcomeMessage = [
+  (name) => `Welcome, ${name}!`,
+  (name) => `Ready to crush it, ${name}!?`,
+  (name) => `Howdy, ${name}!`,
+  (name) => `Let's lift, ${name}!`,
+  (name) => `Looking great, ${name}!`,
+  (name) => `Ready to lift, ${name}!?`,
+];
+
+const getRandomWelcomeMessage = (name) => {
+  const index = Math.floor(Math.random() * welcomeMessage.length);
+  return welcomeMessage[index](name);
+};
 
 function HomePage() {
-  //   const dispatch = useDispatch();
-  //   // const { setModalContent, closeModal } = useModal();
-  //   const [isLoaded, setIsLoaded] = useState(false);
-  //   const user = useSelector(sessionActions.sessionUser);
+  // const dispatch = useDispatch();
+  // const { setModalContent, closeModal } = useModal();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [welcomeMessage, setWelcomeMessage] = useState('');
+  const user = useSelector(sessionActions.sessionUser);
 
-  //   if (!isLoaded) return <Loading />;
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+      if (user?.id) {
+        // Call the function to get a random welcome message for the user
+        setWelcomeMessage(getRandomWelcomeMessage(user.first_name));
+      }
+    }, 1000);
+  }, [user?.id, user?.first_name]);
 
-  return <div id='home-page'>HomePage</div>;
+  if (!isLoaded) return <Loading />;
+
+  return (
+    <div id='home-page'>
+      <div id='main-content'>
+        {!user?.id ? (
+          <LandingPageModal />
+        ) : (
+          <h2>
+            {welcomeMessage}
+            <span className='blinking-cursor'></span>
+          </h2>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default HomePage;

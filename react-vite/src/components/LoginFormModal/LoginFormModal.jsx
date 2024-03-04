@@ -20,14 +20,14 @@ function LoginFormModal() {
     if (loginAsDemoUser1) {
       data = await dispatch(
         sessionActions.login({
-          email: 'jason@aa.io',
+          email: 'demo@aa.io',
           password: 'password',
         })
       );
     } else if (loginAsDemoUser2) {
       data = await dispatch(
         sessionActions.login({
-          email: 'dwayne@aa.io',
+          email: 'jason@aa.io',
           password: 'password',
         })
       );
@@ -89,20 +89,20 @@ function LoginFormModal() {
         </button>
         <div className='demo-users'>
           <p className='text'>Login as demo user: </p>
-          <p
+          <button
             type='submit'
             onClick={(e) => handleSubmit(e, true, false)}
             className='demo-user'
           >
-            user 1
-          </p>
-          <p
+            Demo User 1
+          </button>
+          <button
             type='submit'
             onClick={(e) => handleSubmit(e, false, true)}
             className='demo-user'
           >
-            user 2
-          </p>
+            Demo User 2
+          </button>
         </div>
       </form>
     </>

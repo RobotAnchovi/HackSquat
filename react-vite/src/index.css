@@ -1,1 +1,172 @@
-/* TODO: Add sitewide styles */
+:root {
+  /* Dark background reminiscent of MS DOS */
+  --background-color: #000000;
+  --text-color: #33c633;
+  --modal-background-color: #1a1a1a;
+  --link-color: #4cff4c;
+  --button-background: #262626;
+  --button-text-color: #33c633;
+  --input-background: #333333;
+  --input-text-color: #33c633;
+  --box-shadow: 0 0 10px var(--text-color);
+}
+
+body {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+body,
+button,
+input,
+textarea {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Courier New', Courier, monospace;
+}
+input:focus {
+  box-shadow: 0 0 10px var(--text-color, #33c633);
+  outline: none;
+}
+
+html {
+  scroll-behavior: smooth; /* Smooth scrolling for better UX */
+}
+.disabled:hover,
+select[disabled]:hover {
+  cursor: not-allowed;
+}
+button.disabled:hover {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+button:hover {
+  background-color: var(--text-color);
+  box-shadow: 0 0 10px var(--text-color, #33c633);
+}
+.hidden {
+  display: none;
+}
+.heading {
+  font-size: 25pt;
+  font-weight: bold;
+  word-break: break-word;
+}
+.subheading {
+  font-size: 20pt;
+  font-weight: bold;
+  word-break: break-word;
+}
+.alert-success {
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+form input {
+  padding: 10px;
+  border-radius: 5px;
+}
+form input [type='file'] {
+  padding: 10px;
+  border-radius: 5px;
+}
+form input [type='file']::file-selector-button {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--modal-background-color);
+}
+form select {
+  padding: 10px;
+  border-radius: 5px;
+}
+form textarea {
+  padding: 10px;
+  border-radius: 5px;
+}
+form.btn-primary {
+  background-color: var(--button-background);
+  color: var(--button-text-color);
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+form.btn-primary.enabled:hover {
+  background-color: var(--text-color);
+  color: var(--background-color);
+}
+
+form input::placeholder {
+  font-size: 10pt;
+}
+.modal-errors {
+  color: red;
+}
+.demo-users {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+demo-user.button {
+  width: fit-content;
+}
+
+.demo-user {
+  text-align: left;
+  cursor: pointer;
+}
+.demo-user:hover {
+  box-shadow: 0 0 10px var(--text-color, #33c633);
+}
+
+.alert-success {
+  color: var(--text-color);
+  background-color: #4cff4c;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+input[disabled]:hover {
+  cursor: not-allowed;
+}
+
+a,
+.link-like {
+  color: var(--link-color);
+  text-decoration: none; /* Optional: removes underline from links */
+}
+
+a:hover,
+.link-like:hover {
+  text-decoration: underline; /* Restores underline on hover for better UX */
+}
+
+button {
+  background-color: var(--button-background);
+  color: var(--button-text-color);
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 0.6px;
+}
+
+button:hover {
+  background-color: var(--text-color);
+  color: var(--background-color); /* Invert colors on hover for a visual cue */
+}
+
+input,
+textarea {
+  background-color: var(--input-background);
+  color: var(--input-text-color);
+  border: 1px solid var(--text-color);
+  padding: 8px;
+  margin-bottom: 10px; /* Space out inputs a bit */
+}

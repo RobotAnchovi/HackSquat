@@ -16,6 +16,10 @@ function Navigation() {
   const [isLoaded, setIsLoaded] = useState(false);
   const user = useSelector(sessionActions.sessionUser);
 
+  const handleImageError = (e) => {
+    e.target.src = '/icons8-weightlifting-100.png';
+  };
+
   const showUserProfile = () => {
     setModalContent(
       <UserProfile
@@ -38,21 +42,28 @@ function Navigation() {
 
   return (
     <div id='navbar'>
-      <ul>
-        <li>
-          <NavLink to='/'>
-            <img src='/icons8-weightlifting-100.png' alt='logo' />
-          </NavLink>
-        </li>
-        <li id='profile-buttons'>
+      <NavLink to='/'>
+        <img
+          src='/icons8-weightlifting-100.png'
+          alt='logo'
+          className='logo-image'
+          onError={handleImageError}
+        />
+      </NavLink>
+      <div id='dropdown-menu'>
+        {userIsValid(user) && (
+          <div onClick={showUserProfile} id='user-avatar' title='User Profile'>
+            <img
+              src={getAvatarUrl(user.profile_image_url)}
+              alt='avatar'
+              onError={handleImageError}
+            />
+          </div>
+        )}
+        <div id='profile-buttons'>
           <ProfileButton user={userIsValid(user) ? user : null} />
-        </li>
-        <div onClick={showUserProfile} id='user-avatar' title='User Profile'>
-          {userIsValid(user) && (
-            <img src={getAvatarUrl(user.profile_image_url)} alt='avatar' />
-          )}
         </div>
-      </ul>
+      </div>
     </div>
   );
 }

@@ -46,7 +46,7 @@ function ProfileButton({ user }) {
     <>
       <div>
         <button
-          title='Cilck here to login or sign up'
+          title={user ? `User Menu` : `Click here to login or sign up`}
           id='user-menu'
           onClick={toggleMenu}
         >

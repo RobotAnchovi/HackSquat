@@ -1,0 +1,6 @@
+#delete-btns {
+  display: flex;
+  gap: 10px;
+  height: 30px;
+  width: 75px;
+}

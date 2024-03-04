@@ -1,6 +1,108 @@
+#profile-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100px;
+}
+#user-buttons {
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+}
+#user-buttons button {
+  width: 75px;
+  height: 50px;
+  font-size: 10px;
+  border-radius: 10px;
+  background-color: var(--modal-background-color);
+  box-shadow: 0 0 10px var(--text-color, #33c633);
+}
+#user-buttons button:hover {
+  background-color: var(--text-color);
+  box-shadow: 0 0 10px var(--text-color, #33c633);
+}
+#navbar {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: var(--navbar-background);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* padding left, right and bottom */
+  /* padding: 0 20px 0 20px; */
+  height: 100%;
+}
+#dropdown-menu {
+  position: absolute;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+div #navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+#navbar img:hover {
+  box-shadow: #4cff4c 0px 0px 10px;
+}
+#navbar ul {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 5px;
+  align-items: center;
+  list-style-type: none;
+}
+
 .profile-dropdown {
   position: absolute;
 }
-ul {
-  list-style-type: none;
+
+.logo-image {
+  display: block;
+  background-color: #33c633;
+  border-radius: 10px;
+}
+
+#profile-buttons,
+#user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#user-avatar {
+  bottom: 50px;
+  left: 50px;
+  width: 50px;
+  height: 50px;
+}
+#user-avatar img {
+  width: 50px;
+  height: 50px;
+  background-color: #33c633;
+}
+
+#navbar img,
+#user-avatar img {
+  border-radius: 50%;
+}
+.navlink img {
+  width: 75px;
+  height: 75px;
 }
