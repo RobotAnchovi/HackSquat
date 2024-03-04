@@ -7,7 +7,9 @@ function ConfirmDeleteFormModal({ text, deleteCb, cancelDeleteCb }) {
 
   return (
     <div id='confirm-delete'>
-      <h2 className='subheading'>Confirm Delete</h2>
+      <h2 className='subheading'>
+        Confirm Delete (Y/N)<span className='blinking-cursor'></span>
+      </h2>
       <Question />
       <div id='delete-btns'>
         <button className='btn' onClick={deleteCb}>
