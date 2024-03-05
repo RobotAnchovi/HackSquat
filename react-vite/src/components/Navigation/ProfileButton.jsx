@@ -39,7 +39,9 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     setModalContent(
-      <h2 className='subheading alert-success'>Successfully Logged Out</h2>
+      <h2 className='subheading alert-success'>
+        Successfully Logged Out<span className='blinking-cursor'></span>
+      </h2>
     );
     closeMenu();
     navigate('/');
