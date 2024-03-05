@@ -1,8 +1,14 @@
 .workout-plan-controls {
-  padding-bottom: 10px;
+  display: flex;
+  padding-bottom: 20px;
+  flex-direction: row-reverse;
 }
 .workout-plan-table {
   width: 100%;
+  margin: auto;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  background-color: var(--modal-background-color);
   border-collapse: separate;
   border-spacing: 0 10px;
 }
@@ -29,4 +35,8 @@
 }
 #unique-blinking-cursor.blinking-cursor {
   margin-bottom: 0;
+}
+
+.create-workout-plan-button {
+  animation: glowing-shadow 2s infinite ease-in-out;
 }

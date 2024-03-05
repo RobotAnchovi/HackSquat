@@ -17,7 +17,7 @@ export async function csrfFetch(url, options = {}) {
   const res = await window.fetch(url, options);
 
   if (!res.ok) {
-    throw new Error('Not Authenticated. YEEET!!!!!');
+    throw new Error(res);
   }
   return res;
 }

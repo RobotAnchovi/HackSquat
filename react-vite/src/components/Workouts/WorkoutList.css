@@ -9,13 +9,25 @@
   background-color: var(--modal-background-color);
 }
 
+.workout-list-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .workout-controls {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
+.btn-cancel {
+  margin-left: 10px;
+}
+
 .workout-table {
+  table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
   background-color: var(--modal-background-color);
@@ -23,9 +35,16 @@
 
 .workout-table th,
 .workout-table td {
-  text-align: left;
+  align-items: center;
   padding: 10px;
   border-bottom: 1px solid var(--input-text-color);
+}
+.date-header {
+  text-align: left;
+}
+.action-header,
+.previous-workout-btns {
+  text-align: center;
 }
 
 .workout-table th {
@@ -46,6 +65,10 @@
   cursor: pointer;
 }
 
+.add-workout-button {
+  animation: glowing-shadow 2s infinite ease-in-out;
+}
+
 .edit-workout-button:hover,
 .delete-workout-button:hover {
   background-color: var(--text-color);
@@ -63,5 +86,19 @@
   justify-content: center;
   align-items: center;
   height: 40px;
+  gap: 20px;
+}
+
+.previous-workout-btns {
+  /* display: grid; */
+  height: 40px;
+  padding: 0;
+  align-items: center;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 20px;
 }

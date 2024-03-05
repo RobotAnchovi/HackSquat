@@ -69,6 +69,7 @@ const WorkoutPlans = () => {
           />
         )}
       </div>
+
       {workoutPlans.length > 0 ? (
         <table className='workout-plan-table'>
           <thead>

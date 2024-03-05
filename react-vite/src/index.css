@@ -182,3 +182,14 @@ textarea {
   padding: 8px;
   margin-bottom: 10px; /* Space out inputs a bit */
 }
+@keyframes glowing-shadow {
+  0% {
+    box-shadow: 0 0 5px var(--button-text-color);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--button-text-color);
+  }
+  100% {
+    box-shadow: 0 0 5px var(--button-text-color);
+  }
+}

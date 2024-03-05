@@ -16,7 +16,7 @@ def create_workout():
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate():
         try:
-            workout = Workout(  # type: ignore
+            workout = Workout(
                 workout_plan_id=form.data.get("workout_plan_id"),
                 user_id=current_user.id,
                 date=form.data["date"],
@@ -45,7 +45,7 @@ def get_workouts(user_id):
     if user_id != current_user.id:
         return jsonify({"errors": "Unauthorized"}), 401
     workouts = (
-        Workout.query.options(joinedload(Workout.workout_exercises))  # type: ignore
+        Workout.query.options(joinedload(Workout.workout_exercises))
         .filter_by(user_id=user_id)
         .all()
     )
@@ -71,6 +71,10 @@ def get_workout_details(workout_id):
 @workout_routes.route("/<int:workout_id>", methods=["PUT"])
 @login_required
 def update_workout(workout_id):
+    incoming_data = request.json
+    print("INCOMING DATA: ", incoming_data)
+    if incoming_data.get("workout_plan_id") is None:
+        incoming_data["workout_plan_id"] = ""
     workout = Workout.query.get(workout_id)
     if not workout:
         return jsonify({"errors": "Workout not found."}), 404

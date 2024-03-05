@@ -44,6 +44,9 @@ class Workout(db.Model):
             "user_id": self.user_id,
             "date": self.date.isoformat() if self.date else None,
             "notes": self.notes,
+            "duration": self.duration,
+            "intensity": self.intensity,
+            "location": self.location,
             "created_at": self.created_at.strftime("%Y-%m-%d %H:%M:%S"),
             "updated_at": self.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
         }

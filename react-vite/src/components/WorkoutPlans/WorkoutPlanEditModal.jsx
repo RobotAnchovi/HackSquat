@@ -64,7 +64,9 @@ const WorkoutPlanEditModal = ({
       <div id='modal-background' onClick={onClose}></div>
       <div id='modal-content'>
         <form onSubmit={handleSubmit} className='workout-plan-form'>
-          <h2 className='heading'>Edit Workout Plan</h2>
+          <h2 className='heading'>
+            Edit Workout Plan<span className='blinking-cursor'></span>
+          </h2>
           {errors.length > 0 && (
             <div className='modal-errors'>
               {errors.map((error, idx) => (

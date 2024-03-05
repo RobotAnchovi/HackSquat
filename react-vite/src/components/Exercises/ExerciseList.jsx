@@ -10,7 +10,7 @@ const ExerciseList = () => {
   const { exercises } = useSelector((state) => state.exercises);
   const [filteredExercises, setFilteredExercises] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortOption, setSortOption] = useState('name');
+  const [sortOption, setSortOption] = useState('category');
   const [showAddExerciseModal, setShowAddExerciseModal] = useState(false);
   const [showEditExerciseModal, setShowEditExerciseModal] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState(null);
@@ -91,8 +91,8 @@ const ExerciseList = () => {
             className='exercise-sort-select'
             onChange={(e) => setSortOption(e.target.value)}
           >
-            <option value='name'>Alphabetical</option>
             <option value='category'>Category</option>
+            <option value='name'>Alphabetical</option>
             <option value='userCreated'>User Created</option>
           </select>
         </div>

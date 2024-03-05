@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWorkouts } from '../../redux/workouts';
 import { sessionUser } from '../../redux/session';
+import WorkoutEditModal from './WorkoutEditModal';
+import WorkoutFormModal from './WorkoutFormModal';
+import { parseISODate } from '../../utils/dateFormatter';
 import './WorkoutList.css';
 
 const WorkoutList = () => {
@@ -12,6 +15,7 @@ const WorkoutList = () => {
 
   const [selectedWorkout, setSelectedWorkout] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
     if (userId) {
@@ -21,31 +25,47 @@ const WorkoutList = () => {
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  today.setDate(today.getDate() + 1); //^ Set to tomorrow to include today's workouts
 
   const completedWorkouts = allWorkouts
-    .filter((workout) => new Date(workout.date) < today)
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
+    .filter((workout) => parseISODate(workout.date) < today)
+    .sort((a, b) => parseISODate(b.date) - parseISODate(a.date));
   const plannedWorkouts = allWorkouts
-    .filter((workout) => new Date(workout.date) >= today)
-    .sort((a, b) => new Date(a.date) - new Date(b.date));
+    .filter((workout) => parseISODate(workout.date) >= today)
+    .sort((a, b) => parseISODate(a.date) - parseISODate(b.date));
 
   const handleWorkoutClick = (workout) => {
     setSelectedWorkout(workout);
     setShowEditModal(true);
   };
+  const refreshWorkouts = useCallback(() => {
+    if (userId) {
+      dispatch(getWorkouts(userId));
+    }
+  }, [dispatch, userId]);
 
   const handleCloseModal = () => {
     setShowEditModal(false);
     setSelectedWorkout(null);
+    refreshWorkouts();
+  };
+
+  const handleWorkoutDeleted = () => {
+    refreshWorkouts();
   };
 
   return (
     <div className='workout-list-container'>
-      <h2>
-        Workouts<span className='blinking-cursor'></span>
-      </h2>
-
+      <div className='workout-list-top'>
+        <h2>
+          Workouts<span className='blinking-cursor'></span>
+        </h2>
+        <button
+          className='add-workout-button'
+          onClick={() => setShowAddModal(true)}
+        >
+          Add a Workout
+        </button>
+      </div>
       {/* Planned Workouts Section */}
       <div className='planned-workouts-section'>
         <h3>Planned Workouts</h3>
@@ -53,14 +73,14 @@ const WorkoutList = () => {
           <table className='workout-table'>
             <thead>
               <tr>
-                <th>Date</th>
-                <th>Actions</th>
+                <th className='date-header'>Date</th>
+                <th className='action-header'>Actions</th>
               </tr>
             </thead>
             <tbody>
               {plannedWorkouts.map((workout) => (
                 <tr key={workout.id} className='workout-item'>
-                  <td>{new Date(workout.date).toLocaleDateString()}</td>
+                  <td>{parseISODate(workout.date).toLocaleDateString()}</td>
                   <td className='planned-workout-btns'>
                     <button
                       onClick={(e) => {
@@ -74,7 +94,7 @@ const WorkoutList = () => {
                       className='start-workout-button'
                       onClick={(e) => {
                         e.stopPropagation(); // Prevent triggering row click
-                        // Logic to start the workout goes here
+                        setShowAddModal(true);
                         console.log(`Starting workout ID: ${workout.id}`);
                       }}
                     >
@@ -92,19 +112,19 @@ const WorkoutList = () => {
 
       {/* Completed Workouts Section */}
       <div className='completed-workouts-section'>
-        <h3>Completed Workouts</h3>
+        <h3>Previous Workouts</h3>
         <table className='workout-table'>
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Actions</th>
+              <th className='date-header'>Date</th>
+              <th className='action-header'>Actions</th>
             </tr>
           </thead>
           <tbody>
             {completedWorkouts.map((workout) => (
               <tr key={workout.id} className='workout-item'>
-                <td>{new Date(workout.date).toLocaleDateString()}</td>
-                <td>
+                <td>{parseISODate(workout.date).toLocaleDateString()}</td>
+                <td className='previous-workout-btns'>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -120,13 +140,24 @@ const WorkoutList = () => {
         </table>
         {completedWorkouts.length === 0 && <p>No completed workouts found.</p>}
       </div>
-
-      {/* Edit Modal */}
+      {showAddModal && (
+        <WorkoutFormModal
+          onClose={() => {
+            setShowAddModal(false);
+            refreshWorkouts();
+          }}
+          onWorkoutAdded={() => {
+            setShowAddModal(false);
+            refreshWorkouts();
+          }}
+        />
+      )}
       {showEditModal && selectedWorkout && (
         <WorkoutEditModal
           workout={selectedWorkout}
           onClose={handleCloseModal}
-          // Pass any additional props needed for the modal
+          onWorkoutUpdated={refreshWorkouts}
+          onWorkoutDeleted={handleWorkoutDeleted}
         />
       )}
     </div>

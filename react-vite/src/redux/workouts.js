@@ -39,6 +39,11 @@ export const getWorkouts = (userId) => async (dispatch) => {
   const response = await csrfFetch(`/api/workouts/user/${userId}`);
   if (response.ok) {
     const workouts = await response.json();
+
+    console.log(`🦈 --------------------------------------🦈`);
+    console.log(`🦈 ~ getWorkouts ~ workouts:`, workouts);
+    console.log(`🦈 --------------------------------------🦈`);
+
     dispatch(getWorkoutsAction(workouts));
   } else {
     const error = await response.json();
@@ -85,6 +90,10 @@ export const deleteWorkout = (workoutId) => async (dispatch) => {
 };
 
 export const updateWorkout = (workoutId, workoutData) => async (dispatch) => {
+  console.log(`🦈 ----------------------------------------------🦈`);
+  console.log(`🦈 ~ updateWorkout ~ workoutData:`, workoutData);
+  console.log(`🦈 ----------------------------------------------🦈`);
+
   const response = await csrfFetch(`/api/workouts/${workoutId}`, {
     method: 'PUT',
     body: JSON.stringify(workoutData),
