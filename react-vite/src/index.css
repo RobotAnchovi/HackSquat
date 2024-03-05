@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 :root {
   /* Dark background reminiscent of MS DOS */
   --background-color: #000000;
@@ -55,6 +56,7 @@ button:hover {
   display: none;
 }
 .heading {
+  font-family: 'Press Start 2P', cursive;
   font-size: 25pt;
   font-weight: bold;
   word-break: break-word;

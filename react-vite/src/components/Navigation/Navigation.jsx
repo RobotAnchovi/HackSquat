@@ -49,6 +49,7 @@ function Navigation() {
           className='logo-image'
           onError={handleImageError}
         />
+        <span className='site-name'>Hack/Squat</span>
       </NavLink>
       <div id='dropdown-menu'>
         {userIsValid(user) && (
