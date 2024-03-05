@@ -7,17 +7,24 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import * as sessionActions from '../../redux/session';
 import { useNavigate } from 'react-router-dom';
+import UserProfile from '../UserProfile';
+import { getAvatarUrl } from '../../utils/image';
+import './Navigation.css';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const { setModalContent } = useModal();
+  const { modalContent, setModalContent } = useModal();
   const ulRef = useRef();
   const navigate = useNavigate();
 
   const toggleMenu = (e) => {
     e.stopPropagation();
     setShowMenu(!showMenu);
+  };
+
+  const handleImageError = (e) => {
+    e.target.src = '/icons8-weightlifting-100.png';
   };
 
   useEffect(() => {
@@ -33,6 +40,12 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener('click', closeMenu);
   }, [showMenu]);
 
+  useEffect(() => {
+    if (modalContent) {
+      closeMenu();
+    }
+  }, [modalContent]);
+
   const closeMenu = () => setShowMenu(false);
 
   const logout = (e) => {
@@ -47,44 +60,139 @@ function ProfileButton({ user }) {
     navigate('/');
   };
 
+  const userProfile = () => {
+    setModalContent(
+      <UserProfile
+        user={user}
+        setModalContent={setModalContent}
+        closeModal={closeMenu}
+      />
+    );
+  };
+
   return (
-    <>
-      <div>
-        <button
-          title={user ? `User Menu` : `Click here to login or sign up`}
-          id='user-menu'
-          onClick={toggleMenu}
-        >
-          <FaUserCircle />
-        </button>
-      </div>
+    <div id='user-menu-container'>
+      <button id='user-menu' onClick={toggleMenu}>
+        {user ? (
+          <img
+            src={getAvatarUrl(user.profile_image_url)}
+            alt='avatar'
+            onError={handleImageError}
+            className='user-avatar'
+          />
+        ) : (
+          <FaUserCircle size={30} />
+        )}
+      </button>
       {showMenu && (
-        <div id='user-buttons' ref={ulRef}>
+        <ul className='dropdown-menu'>
           {user ? (
-            <div>
-              <button onClick={logout}>Log Out</button>
-            </div>
+            <>
+              <li>
+                <button onClick={userProfile}>Profile</button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    navigate('/exercises');
+                    closeMenu();
+                  }}
+                >
+                  Exercises
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    navigate('/workout-plans');
+                    closeMenu();
+                  }}
+                >
+                  Plans
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    navigate('/workouts');
+                    closeMenu();
+                  }}
+                >
+                  Workouts
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    navigate('/failed-lift');
+                    closeMenu();
+                  }}
+                >
+                  Have Fun!
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowMenu(false);
+                    alert('Feature is coming soon!');
+                  }}
+                >
+                  Progress
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowMenu(false);
+                    alert('Feature is coming soon!');
+                  }}
+                >
+                  Nutrition
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowMenu(false);
+                    alert('Feature is coming soon!');
+                  }}
+                >
+                  Bar Calc
+                </button>
+              </li>
+              <li>
+                <button onClick={logout}>Log Out</button>
+              </li>
+            </>
           ) : (
             <>
-              <div>
+              <li>
                 <OpenModalButton
                   buttonText='Log In'
-                  onButtonClick={closeMenu}
-                  modalComponent={<LoginFormModal />}
+                  onButtonClick={() => {
+                    closeMenu();
+                    setModalContent(<LoginFormModal />);
+                  }}
                 />
-              </div>
-              <div>
+              </li>
+              <li>
                 <OpenModalButton
                   buttonText='Sign Up'
-                  onButtonClick={closeMenu}
-                  modalComponent={<SignupFormModal />}
+                  onButtonClick={() => {
+                    closeMenu();
+                    setModalContent(<SignupFormModal />);
+                  }}
                 />
-              </div>
+              </li>
             </>
           )}
-        </div>
+        </ul>
       )}
-    </>
+    </div>
   );
 }
 

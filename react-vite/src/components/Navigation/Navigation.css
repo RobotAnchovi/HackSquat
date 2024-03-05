@@ -85,21 +85,18 @@ div #navbar {
   border-radius: 10px;
 }
 
-#profile-buttons,
-#user-avatar {
+#profile-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-#user-avatar {
   bottom: 50px;
   left: 50px;
   width: 50px;
   height: 50px;
   cursor: pointer;
 }
-#user-avatar img {
+
+#profile-buttons img {
   width: 50px;
   height: 50px;
   background-color: #33c633;
@@ -110,6 +107,27 @@ div #navbar {
   border-radius: 50%;
 }
 .navlink img {
-  width: 75px;
-  height: 75px;
+  width: 65px;
+  height: 65px;
+}
+#user-menu-container {
+  position: relative;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--modal-background-color);
+  border-radius: 10px;
+  box-shadow: #4cff4c 0px 0px 10px;
+  z-index: 100;
+  width: auto;
+}
+.dropdown-menu li {
+  padding: 10px;
+  cursor: pointer;
+}
+#user-menu {
+  animation: glowing-shadow 2s infinite ease-in-out;
+  background-color: #33c633;
 }

@@ -4,7 +4,7 @@ const FailedLift = () => {
   return (
     <div style={{ padding: '20px', textAlign: 'center' }}>
       <h1>
-        404: Page Not Found
+        Not sure if this is what you were looking for...
         <span className='blinking-cursor'></span>
       </h1>
       <p>But don&apos;t worry, we&apos;ve got something for you!</p>
