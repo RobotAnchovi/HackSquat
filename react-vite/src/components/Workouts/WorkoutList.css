@@ -1,0 +1,67 @@
+/* WorkoutList.css */
+
+.workout-list-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  background-color: var(--modal-background-color);
+}
+
+.workout-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.workout-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--modal-background-color);
+}
+
+.workout-table th,
+.workout-table td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid var(--input-text-color);
+}
+
+.workout-table th {
+  background-color: var(--modal-background-color);
+}
+
+.workout-table tr:hover {
+  background-color: var(--button-background);
+}
+
+.edit-workout-button,
+.delete-workout-button {
+  background-color: var(--button-background);
+  color: var(--button-text-color);
+  margin-right: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-workout-button:hover,
+.delete-workout-button:hover {
+  background-color: var(--text-color);
+  color: var(--background-color);
+}
+
+.workout-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+.planned-workout-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  gap: 20px;
+}
