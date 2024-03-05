@@ -36,6 +36,7 @@ function SignupFormModal() {
     }
 
     setImageIsUploading(true);
+
     const data = await dispatch(
       sessionActions.signup({
         first_name: firstName,
@@ -47,12 +48,16 @@ function SignupFormModal() {
       })
     );
 
-    if (data?.errors) {
+    if (data) {
       enabledSubmitButton();
       setImageIsUploading(false);
-      return setErrors(data.errors);
+      return setErrors(data);
     }
-    setModalContent(<h2 className='subheading alert-success'>Success!!!</h2>);
+    setModalContent(
+      <h2 className='subheading alert-success'>
+        Success!!!<span className='blinking-cursor'></span>
+      </h2>
+    );
     setImageIsUploading(false);
     enabledSubmitButton();
   };
