@@ -4,7 +4,8 @@ const FailedLift = () => {
   return (
     <div style={{ padding: '20px', textAlign: 'center' }}>
       <h1>
-        404: Page Not Found<span className='blinking-cursor'></span>
+        404: Page Not Found
+        <span className='blinking-cursor'></span>
       </h1>
       <p>But don&apos;t worry, we&apos;ve got something for you!</p>
       <iframe
@@ -15,6 +16,10 @@ const FailedLift = () => {
         frameBorder='0'
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
         allowfullscreen
+        style={{
+          boxShadow: '0 0 10px 0 #33c633',
+          borderRadius: '10px',
+        }}
       ></iframe>
       <br />
       <Link
@@ -23,10 +28,12 @@ const FailedLift = () => {
           marginTop: '20px',
           display: 'inline-block',
           textDecoration: 'none',
-          color: 'white',
-          backgroundColor: '#007bff',
+          // color: 'white',
+          backgroundColor: '#262626',
           padding: '10px 20px',
-          borderRadius: '5px',
+          fontWeight: 'bold',
+          borderRadius: '10px',
+          boxShadow: '0 0 10px 0 #33c633',
         }}
       >
         Go Home

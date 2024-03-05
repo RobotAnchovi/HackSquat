@@ -15,5 +15,9 @@ export async function csrfFetch(url, options = {}) {
   options.headers['csrf_token'] = Cookies.get('csrf_token');
 
   const res = await window.fetch(url, options);
+
+  if (!res.ok) {
+    throw new Error('Not Authenticated. YEEET!!!!!');
+  }
   return res;
 }
