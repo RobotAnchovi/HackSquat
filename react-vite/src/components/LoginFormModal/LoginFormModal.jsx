@@ -11,7 +11,7 @@ function LoginFormModal() {
   const [errors, setErrors] = useState({});
   const { setModalContent } = useModal();
 
-  const handleSubmit = async (e, loginAsDemoUser1, loginAsDemoUser2) => {
+  const handleSubmit = async (e, loginAsDemoUser1) => {
     e.preventDefault();
     disabledSubmitButton();
 
@@ -24,13 +24,13 @@ function LoginFormModal() {
           password: 'password',
         })
       );
-    } else if (loginAsDemoUser2) {
-      data = await dispatch(
-        sessionActions.login({
-          email: 'jason@aa.io',
-          password: 'password',
-        })
-      );
+      // } else if (loginAsDemoUser2) {
+      //   data = await dispatch(
+      //     sessionActions.login({
+      //       email: 'jason@aa.io',
+      //       password: 'password',
+      //     })
+      //   );
     } else {
       data = await dispatch(
         sessionActions.login({
@@ -48,7 +48,11 @@ function LoginFormModal() {
         );
       return setErrors(data.errors);
     }
-    setModalContent(<h2 className='subheading alert-success'>Success!!!</h2>);
+    setModalContent(
+      <h2 className='subheading alert-success'>
+        Success!!!<span className='blinking-cursor'></span>
+      </h2>
+    );
     enabledSubmitButton();
   };
 
@@ -96,13 +100,13 @@ function LoginFormModal() {
           >
             Demo User 1
           </button>
-          <button
+          {/* <button
             type='submit'
             onClick={(e) => handleSubmit(e, false, true)}
             className='demo-user'
           >
             Demo User 2
-          </button>
+          </button> */}
         </div>
       </form>
     </>
