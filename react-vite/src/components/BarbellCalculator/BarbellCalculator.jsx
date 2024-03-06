@@ -38,14 +38,23 @@ function BarbellCalculatorModal({ onClose }) {
   };
 
   const getColorByWeight = (plateWeight) => {
-    const weight = unit === 'kg' ? plateWeight : plateWeight * 2.20462;
-
-    if (weight >= 25) return '#FF0000';
-    else if (weight >= 20) return '#0000FF';
-    else if (weight >= 15) return '#FFFF00';
-    else if (weight >= 10) return '#008000';
-    else if (weight >= 5) return '#696969';
-    else return '#FFFFFF';
+    let weightInKg;
+    if (unit === 'kg') {
+      weightInKg = plateWeight;
+    } else {
+      if (plateWeight >= 45) weightInKg = 20;
+      else if (plateWeight >= 35) weightInKg = 15;
+      else if (plateWeight >= 25) weightInKg = 10;
+      else if (plateWeight >= 10) weightInKg = 5;
+      else if (plateWeight >= 5) weightInKg = 2.5;
+      else weightInKg = 1;
+    }
+    if (weightInKg >= 25) return '#FF0000'; //^ Red
+    else if (weightInKg >= 20) return '#0000FF'; //^ Blue
+    else if (weightInKg >= 15) return '#FFFF00'; //^ Yellow
+    else if (weightInKg >= 10) return '#008000'; //^ Green
+    else if (weightInKg >= 5) return '#696969'; //^ Grey
+    else return '#FFFFFF'; //^ White
   };
 
   const calculatePlates = (weight, unit) => {
