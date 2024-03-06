@@ -59,7 +59,7 @@ def get_workouts(user_id):
 @workout_routes.route("/<int:workout_id>", methods=["GET"])
 @login_required
 def get_workout_details(workout_id):
-    workout = Workout.query.options(joinedload(Workout.workout_exercises)).get(  # type: ignore
+    workout = Workout.query.options(joinedload(Workout.workout_exercises)).get(
         workout_id
     )
     if workout and workout.user_id == current_user.id:

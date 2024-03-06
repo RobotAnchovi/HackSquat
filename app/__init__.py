@@ -79,7 +79,7 @@ def api_help():
     acceptable_methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
     route_list = {
         rule.rule: [
-            [method for method in rule.methods if method in acceptable_methods],  # type: ignore
+            [method for method in rule.methods if method in acceptable_methods],
             app.view_functions[rule.endpoint].__doc__,
         ]
         for rule in app.url_map.iter_rules()
