@@ -75,10 +75,11 @@
 .edit-exercise-button {
   background-color: var(--button-background);
   color: var(--button-text-color);
-  margin-right: 5px;
+  /* margin-right: 5px; */
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+  height: 35px;
 }
 
 .edit-exercise-button:hover,
@@ -89,7 +90,7 @@
 
 .exercise-actions {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   height: 40px;
 }

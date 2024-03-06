@@ -6,6 +6,16 @@ import LandingPageModal from '../LandingPageModal';
 import Loading from '../Loading';
 // import UserProfile from '../UserProfile';
 import * as sessionActions from '../../redux/session';
+import { useNavigate } from 'react-router-dom';
+import {
+  FaDumbbell,
+  FaUserFriends,
+  FaUtensils,
+  FaCalculator,
+  FaRunning,
+  FaLaughBeam,
+} from 'react-icons/fa';
+import './HomePage.css';
 
 const welcomeMessage = [
   (name) => `Welcome, ${name}!`,
@@ -14,6 +24,7 @@ const welcomeMessage = [
   (name) => `Let's lift, ${name}!`,
   (name) => `Looking great, ${name}!`,
   (name) => `Ready to lift, ${name}!?`,
+  (name) => `${name} did NOT die of dysentery!`,
 ];
 
 const getRandomWelcomeMessage = (name) => {
@@ -22,6 +33,7 @@ const getRandomWelcomeMessage = (name) => {
 };
 
 function HomePage() {
+  const navigate = useNavigate();
   // const dispatch = useDispatch();
   // const { setModalContent, closeModal } = useModal();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -32,11 +44,15 @@ function HomePage() {
     setTimeout(() => {
       setIsLoaded(true);
       if (user?.id) {
-        // Call the function to get a random welcome message for the user
+        //^ Call the function to get a random welcome message for the user
         setWelcomeMessage(getRandomWelcomeMessage(user.first_name));
       }
     }, 1000);
   }, [user?.id, user?.first_name]);
+
+  const handleFeatureComingSoon = () => {
+    alert('Feature coming soon!');
+  };
 
   if (!isLoaded) return <Loading />;
 
@@ -46,10 +62,36 @@ function HomePage() {
         {!user?.id ? (
           <LandingPageModal />
         ) : (
-          <h2>
-            {welcomeMessage}
-            <span className='blinking-cursor'></span>
-          </h2>
+          <div>
+            <h2>
+              {welcomeMessage}
+              <span className='blinking-cursor'></span>
+            </h2>
+            <div className='navigation-links'>
+              <button onClick={() => navigate('/exercises')}>
+                <FaDumbbell /> Exercises
+              </button>
+              <button onClick={() => navigate('/workout-plans')}>
+                <FaUserFriends /> Plans
+              </button>
+              <button onClick={() => navigate('/workouts')}>
+                <FaRunning /> Workouts
+              </button>
+              <button onClick={() => navigate('/failed-lift')}>
+                <FaLaughBeam /> Have Fun!
+              </button>
+              <button onClick={handleFeatureComingSoon}>
+                <FaUtensils /> Nutrition
+              </button>
+              <button onClick={handleFeatureComingSoon}>
+                <FaCalculator /> Bar Calc
+              </button>
+            </div>
+            <div id='site-title'>
+              <h1>Hack/Squat</h1>
+              <h3>Code Hard, Lift Harder- Where Programming Meets Power</h3>
+            </div>
+          </div>
         )}
       </div>
     </div>

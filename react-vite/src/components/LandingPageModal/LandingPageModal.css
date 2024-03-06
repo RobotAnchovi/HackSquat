@@ -5,8 +5,10 @@
   text-align: center;
   padding: 20px;
   border-radius: 20px;
-  height: fit-content;
-  width: fit-content;
+  height: auto;
+  max-height: 90%;
+  width: auto;
+  max-width: 80%;
   animation: slide-in 1.5s ease-in-out;
   box-shadow: 0 0 10px var(--text-color, #33c633);
   position: fixed;
@@ -39,7 +41,7 @@
   /* text-indent: 2em; */
   line-height: 2;
   /* margin-left: 15px; */
-  font-size: 15pt;
+  font-size: calc(5pt + 0.5vw);
 }
 
 .close-landing-page-modal {
@@ -76,12 +78,12 @@
   animation: blink 1s step-end infinite;
   vertical-align: middle;
 }
-
+/*
 @media screen and (max-width: 1020px) {
   .landing-page-modal {
     top: 20px;
-    width: 90%; /* More responsive for narrower screens */
-    height: auto; /* Adjusted for content fit */
-    margin: 0 auto; /* Center the modal */
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
   }
-}
+} */
