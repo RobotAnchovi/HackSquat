@@ -15,6 +15,10 @@ const ExerciseList = () => {
   const [showEditExerciseModal, setShowEditExerciseModal] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState(null);
 
+  const handleFeatureComingSoon = () => {
+    alert('Feature coming soon!');
+  };
+
   useEffect(() => {
     dispatch(loadExercises());
   }, [dispatch]);
@@ -130,7 +134,12 @@ const ExerciseList = () => {
                 <td>{exercise.name}</td>
                 <td>{exercise.category}</td>
                 <td className='exercise-actions'>
-                  <button className='add-to-plan-button'>Add to Plan</button>
+                  <button
+                    onClick={handleFeatureComingSoon}
+                    className='add-to-plan-button'
+                  >
+                    Add to Plan
+                  </button>
                   {exercise.user_id && (
                     <>
                       <button
