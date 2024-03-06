@@ -1,7 +1,3 @@
-import tracemalloc
-
-tracemalloc.start()
-
 import os
 from flask import Flask, request, redirect
 from flask_cors import CORS
@@ -92,21 +88,21 @@ def api_help():
     return route_list
 
 
-# Memory debugging route
-@app.route("/debug/memory")
-def debug_memory():
-    if not tracemalloc.is_tracing():
-        tracemalloc.start()
+# # Memory debugging route
+# @app.route("/debug/memory")
+# def debug_memory():
+#     if not tracemalloc.is_tracing():
+#         tracemalloc.start()
 
-    snapshot = tracemalloc.take_snapshot()
-    top_stats = snapshot.statistics("lineno")
+#     snapshot = tracemalloc.take_snapshot()
+#     top_stats = snapshot.statistics("lineno")
 
-    result = []
-    for stat in top_stats[:20]:  # Adjust the slice for more or fewer lines
-        result.append(str(stat))
+#     result = []
+#     for stat in top_stats[:20]:  # Adjust the slice for more or fewer lines
+#         result.append(str(stat))
 
-    # Combine the results into a multi-line string and return as a response
-    return "\n".join(result), 200
+#     # Combine the results into a multi-line string and return as a response
+#     return "\n".join(result), 200
 
 
 @app.route("/", defaults={"path": ""})
