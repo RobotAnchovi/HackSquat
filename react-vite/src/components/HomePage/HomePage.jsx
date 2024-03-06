@@ -4,9 +4,9 @@ import LandingPageModal from '../LandingPageModal';
 // import { userIsValid } from '../../utils/user';
 // import { useModal } from '../../context/Modal';
 import Loading from '../Loading';
-// import UserProfile from '../UserProfile';
 import * as sessionActions from '../../redux/session';
 import { useNavigate } from 'react-router-dom';
+import BarbellCalculatorModal from '../BarbellCalculator';
 import {
   FaDumbbell,
   FaUserFriends,
@@ -35,7 +35,7 @@ const getRandomWelcomeMessage = (name) => {
 function HomePage() {
   const navigate = useNavigate();
   // const dispatch = useDispatch();
-  // const { setModalContent, closeModal } = useModal();
+  const [showCalculatorModal, setShowCalculatorModal] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [welcomeMessage, setWelcomeMessage] = useState('');
   const user = useSelector(sessionActions.sessionUser);
@@ -83,9 +83,14 @@ function HomePage() {
               <button onClick={handleFeatureComingSoon}>
                 <FaUtensils /> Nutrition
               </button>
-              <button onClick={handleFeatureComingSoon}>
+              <button onClick={() => setShowCalculatorModal(true)}>
                 <FaCalculator /> Bar Calc
               </button>
+              {showCalculatorModal && (
+                <BarbellCalculatorModal
+                  onClose={() => setShowCalculatorModal(false)}
+                />
+              )}
             </div>
             <div id='site-title'>
               <h1>Hack/Squat</h1>

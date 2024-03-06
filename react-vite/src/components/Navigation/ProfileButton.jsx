@@ -9,12 +9,14 @@ import * as sessionActions from '../../redux/session';
 import { useNavigate } from 'react-router-dom';
 import UserProfile from '../UserProfile';
 import { getAvatarUrl } from '../../utils/image';
+import BarbellCalculatorModal from '../BarbellCalculator';
 import './Navigation.css';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const { modalContent, setModalContent } = useModal();
+  const [showCalculatorModal, setShowCalculatorModal] = useState(false);
   const ulRef = useRef();
   const navigate = useNavigate();
 
@@ -154,15 +156,14 @@ function ProfileButton({ user }) {
                 </button>
               </li>
               <li>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowMenu(false);
-                    alert('Feature is coming soon!');
-                  }}
-                >
+                <button onClick={() => setShowCalculatorModal(true)}>
                   Bar Calc
                 </button>
+                {showCalculatorModal && (
+                  <BarbellCalculatorModal
+                    onClose={() => setShowCalculatorModal(false)}
+                  />
+                )}
               </li>
               <li>
                 <button onClick={logout}>Log Out</button>

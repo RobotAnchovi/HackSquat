@@ -1,0 +1,117 @@
+#modal {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#modal-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--modal-background-color);
+  z-index: 1;
+}
+#modal-content {
+  position: relative;
+  z-index: 2;
+}
+.inventory-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.plate {
+  display: flex;
+  align-items: center;
+}
+.plate-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plate-inventory {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin: 0 10px;
+}
+
+.inventory-circle {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: var(--modal-background-color);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.inventory-adjust {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+
+.plate-weight,
+.plate-unit {
+  font-size: 1rem;
+  color: black;
+  font-weight: bold;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+/* Barbell Visual */
+.barbell-visualization {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.barbell {
+  display: flex;
+  align-items: center;
+}
+
+.barbell-plate {
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  border: 1px solid #000;
+  color: #000;
+}
+
+.bar {
+  height: 20px;
+  width: 75px;
+  background-color: #666;
+  /* margin: 0 10px; */
+}
