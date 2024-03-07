@@ -11,7 +11,7 @@ const WorkoutFormModal = ({ onClose, onWorkoutAdded }) => {
   const [intensity, setIntensity] = useState('');
   const [location, setLocation] = useState('');
   const [notes, setNotes] = useState('');
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,20 +70,26 @@ const WorkoutFormModal = ({ onClose, onWorkoutAdded }) => {
           <input
             type='number'
             value={duration}
+            required
             onChange={(e) => setDuration(e.target.value)}
             placeholder='Duration (minutes)'
+            min='1'
           />
           <input
             type='number'
             value={intensity}
             onChange={(e) => setIntensity(e.target.value)}
             placeholder='Intensity (1-10)'
+            required
+            min='1'
+            max='10'
           />
           <input
             type='text'
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            placeholder='Location'
+            placeholder='Location (Required)'
+            required
           />
           <textarea
             value={notes}
