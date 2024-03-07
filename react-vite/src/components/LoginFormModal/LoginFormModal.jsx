@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { disabledSubmitButton, enabledSubmitButton } from '../../utils/dom';
 import * as sessionActions from '../../redux/session';
+import SignupFormModal from '../SignupFormModal';
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ function LoginFormModal() {
         Success!!!<span className='blinking-cursor'></span>
       </h2>
     );
+    setTimeout(() => setModalContent(null), 500);
     enabledSubmitButton();
   };
 
@@ -108,6 +110,13 @@ function LoginFormModal() {
             Demo User 2
           </button> */}
         </div>
+        <button
+          type='button'
+          onClick={() => setModalContent(<SignupFormModal />)}
+          className='switch-to-signup'
+        >
+          Don&apos;t have an account? Sign up
+        </button>
       </form>
     </>
   );

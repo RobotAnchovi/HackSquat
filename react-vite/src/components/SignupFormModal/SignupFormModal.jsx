@@ -4,6 +4,7 @@ import { useModal } from '../../context/Modal';
 import { disabledSubmitButton, enabledSubmitButton } from '../../utils/dom';
 import { isImageValid } from '../../utils/image';
 import Loading from '../Loading';
+import LoginFormModal from '../LoginFormModal';
 import * as sessionActions from '../../redux/session';
 
 function SignupFormModal() {
@@ -58,6 +59,7 @@ function SignupFormModal() {
         Success!!!<span className='blinking-cursor'></span>
       </h2>
     );
+    setTimeout(() => setModalContent(null), 500);
     setImageIsUploading(false);
     enabledSubmitButton();
   };
@@ -165,6 +167,13 @@ function SignupFormModal() {
           disabled={inputInvalid()}
         >
           Submit
+        </button>
+        <button
+          type='button'
+          className='switch-to-login'
+          onClick={() => setModalContent(<LoginFormModal />)}
+        >
+          Already have an account? Log in
         </button>
       </form>
     </>
