@@ -115,6 +115,8 @@ div #navbar {
 }
 .dropdown-menu {
   position: absolute;
+  display: flex;
+
   top: 100%;
   right: 0;
   background-color: var(--modal-background-color);
@@ -142,4 +144,12 @@ div #navbar {
   max-height: 100%;
   object-fit: cover;
   border-radius: 50%;
+}
+.login {
+  height: 50px;
+  width: 100px;
+}
+.sign-up {
+  height: 50px;
+  width: 100px;
 }

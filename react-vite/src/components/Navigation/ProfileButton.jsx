@@ -171,7 +171,7 @@ function ProfileButton({ user }) {
             </>
           ) : (
             <>
-              <li>
+              <li className='login'>
                 <OpenModalButton
                   buttonText='Log In'
                   onButtonClick={() => {
@@ -180,7 +180,7 @@ function ProfileButton({ user }) {
                   }}
                 />
               </li>
-              <li>
+              <li className='sign-up'>
                 <OpenModalButton
                   buttonText='Sign Up'
                   onButtonClick={() => {
