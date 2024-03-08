@@ -25,6 +25,8 @@ const welcomeMessage = [
   (name) => `Looking great, ${name}!`,
   (name) => `Ready to lift, ${name}!?`,
   (name) => `${name} did NOT die of dysentery!`,
+  (name) => `Welcome to Hack/Squat, ${name}!`,
+  (name) => `You're looking strong, ${name}!`,
 ];
 
 const getRandomWelcomeMessage = (name) => {
