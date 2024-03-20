@@ -53,7 +53,7 @@ const WorkoutExercises = ({ workoutId }) => {
           className='add-exercise-button'
           onClick={() => setShowAddModal(true)}
         >
-          Add Exercise
+          Add Exercise to Plan
         </button>
       </div>
       <ul className='exercise-list'>
