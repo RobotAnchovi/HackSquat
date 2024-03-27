@@ -27,14 +27,14 @@ const LandingPageModal = () => {
         HackSquat is designed to empower your fitness journey through
         personalized workout planning, scheduling, and comprehensive progress
         analytics. Our intuitive platform simplifies the creation of custom
-        workout plans with a user-friendly drag-and-drop interface, making it
-        easy to organize and adapt your fitness routine. Dive deep into your
-        performance with our advanced analytics, visualizing your progress and
-        fine-tuning your goals with data-driven insights. Whether you&apos;re
-        aiming to hit new strength milestones, tracking your nutritional
-        targets, or analyzing your lift progression, HackSquat is here to
-        elevate your training. Join us and transform the way you workout, one
-        squat at a time.
+        workout plans with a user-friendly drag-and-drop interface (Coming
+        soon), making it easy to organize and adapt your fitness routine. Dive
+        deep into your performance with our advanced analytics, visualizing your
+        progress and fine-tuning your goals with data-driven insights. Whether
+        you&apos;re aiming to hit new strength milestones, tracking your
+        nutritional targets, or analyzing your lift progression, HackSquat is
+        here to elevate your training. Join us and transform the way you
+        workout, one squat at a time.
       </p>
       <br />
       <p>
